@@ -9,7 +9,7 @@ const Providers = function(providers) {
   this.email=providers.email;
   this.address=providers.address;
 };
-//DEFINICIONES CRUD
+//CRUD
 Providers.create = (newProviders, result) => {
     sql.query("INSERT INTO providers SET ?", newProviders, (err, res) => {
       if (err) {
@@ -17,7 +17,7 @@ Providers.create = (newProviders, result) => {
         result(err, null);
         return;
       }
-      console.log("Proveedor registrado correctamente!: ", { id: res.insertId, ...newProviders });
+      console.log("created provider: ", { id: res.insertId, ...newProviders });
       result(null, { id: res.insertId, ...newProviders });
     });
   };
@@ -31,12 +31,13 @@ Providers.create = (newProviders, result) => {
       }
   
       if (res.length) {
-        console.log("Proveedor encontrado: ", res[0]);
+        console.log("found provider: ", res[0]);
         result(null, res[0]);
         return;
       }
-      // No se encontro el id del proveedor
-      result({ kind: "no hemos encontrado al proveedor" }, null);
+
+      // not found Provider with the id
+      result({ kind: "not_found" }, null);
     });
   };
 
@@ -65,12 +66,12 @@ Providers.create = (newProviders, result) => {
         }
   
         if (res.affectedRows == 0) {
-          // No se encontro el proveedor para actualizar
-          result({ kind: "No encontramos el proveedor para actualizar" }, null);
+          // not found Provider with the id
+          result({ kind: "not_found" }, null);
           return;
         }
   
-        console.log("Proveedor actualizado: ", { id: id, ...providers });
+        console.log("updated provider: ", { id: id, ...providers });
         result(null, { id: id, ...providers });
       }
     );
@@ -86,11 +87,11 @@ Providers.create = (newProviders, result) => {
   
       if (res.affectedRows == 0) {
         // No se encontro el proveedor a eliminar
-        result({ kind: "No se encontro al proveedor que desea eliminar" }, null);
+        result({ kind: "not_found" }, null);
         return;
       }
   
-      console.log("Eliminando el proveedor: ", id);
+      console.log("deleted provider: ", id);
       result(null, res);
     });
   };
