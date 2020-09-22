@@ -1,4 +1,4 @@
-const sql = require("./conexion");
+const sql = require("../conexion.js");
 
 // constructor
 const Brand = function(brand) {
