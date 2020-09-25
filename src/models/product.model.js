@@ -2,12 +2,12 @@ const sql = require("../conexion.js");
 
 // constructor
 const Product = function(product) {
-  this.correlative_product = product.correlative_product;
-  this.name = product.name;
-  this.brand_id = product.brand_id;
-  this.product_category_id = product.product_category_id;
-  this.perishable = product.perishable;
-  this.lot_id = product.lot_id;
+  this.Name = product.Name;
+  this.Perishable = product.Perishable;
+  this.Correlative_Product = product.Correlative_Product;
+  this.Brand_Id = product.Brand_Id;
+  this.Product_Category_Id = product.Product_Category_Id;
+  this.Lot_Id = product.Lot_Id;
 };
 
 //CRUD
@@ -57,8 +57,8 @@ Product.getAll = result => {
 
 Product.updateById = (id, product, result) => {
   sql.query(
-    "UPDATE product SET correlative_product = ?, name = ?, brand_id = ?, product_category_id = ?, perishable = ?, lot_id = ? WHERE product_id = ?",
-    [product.correlative_product, product.name, product.brand_id, product.product_category_id, product.perishable, product.lot_id],
+    "UPDATE product SET Name = ?, Perishable = ?, Correlative_Product = ?, Brand_Id = ?, Product_Category_Id = ?, Lot_Id = ? WHERE Product_Id = ?",
+    [product.Name, product.Perishable, product.Correlative_Product, product.Brand_Id, product.Product_Category_Id, product.Lot_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

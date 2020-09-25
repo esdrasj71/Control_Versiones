@@ -2,7 +2,7 @@ const sql = require("../conexion.js");
 
 // constructor
 const Product_Category = function(product_category) {
-  this.name = product_category.name;
+  this.Name = product_category.Name;
 };
 
 Product_Category.create = (newProduct_Category, result) => {
@@ -52,7 +52,7 @@ Product_Category.getAll = result => {
 Product_Category.updateById = (id, product_category, result) => {
   sql.query(
     "UPDATE product_category SET name = ? WHERE product_category_id  = ?",
-    [product_category.name, id],
+    [product_category.Name, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

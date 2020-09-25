@@ -9,12 +9,12 @@ exports.create = (req, res) => {
   }
   // Create Product
   const product = new Product({
-    correlative_product: req.body.correlative_product,
-    name: req.body.name,
-    brand_id: req.brand_id,
-    product_category_id: req.product_category_id,
-    perishable: req.perishable,
-    lot_id: req.lot_id,
+    Name: req.body.Name,
+    Perishable: req.body.Perishable,
+    Correlative_Product: req.body.Correlative_Product,
+    Brand_Id: req.body.Brand_Id,
+    Product_Category_Id: req.body.Product_Category_Id,
+    Lot_Id: req.Lot_Id,
   });
 
   // Save product

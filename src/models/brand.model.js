@@ -52,7 +52,7 @@ Brand.getAll = result => {
 Brand.updateById = (id, brand, result) => {
   sql.query(
     "UPDATE brand SET name = ? WHERE brand_id = ?",
-    [brand.name, id],
+    [brand.Name, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

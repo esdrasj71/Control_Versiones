@@ -9,7 +9,7 @@ exports.create = (req, res) => {
   }
   // Create product category
   const product_category = new Product_Category({
-    name: req.body.name
+    Name: req.body.Name
   });
 
   // Save product category
