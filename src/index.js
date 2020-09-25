@@ -5,7 +5,7 @@ const app = express();
 
 // para que la consola nos reconozca peticiones json
 app.use(bodyParser.json());
-
+app.use(cors({origin: '*'}));
 // analizar solicitudes de tipo: application / x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
