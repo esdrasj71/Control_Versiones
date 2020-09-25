@@ -2,7 +2,7 @@ const sql = require("../conexion.js");
 
 // constructor
 const Brand = function(brand) {
-  this.name = brand.name;
+  this.Name = brand.Name;
 };
 
 //CRUD

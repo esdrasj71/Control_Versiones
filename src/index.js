@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const conectar = require('./conexion');
 const app = express();  
+const cors = require("cors");
 
 // para que la consola nos reconozca peticiones json
 app.use(bodyParser.json());

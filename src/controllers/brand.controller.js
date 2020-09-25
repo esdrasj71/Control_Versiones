@@ -9,7 +9,7 @@ exports.create = (req, res) => {
   }
   // Create brand
   const brand = new Brand({
-    name: req.body.name
+    Name: req.body.Name
   });
 
   // Save brand
