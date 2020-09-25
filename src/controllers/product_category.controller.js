@@ -4,13 +4,12 @@ exports.create = (req, res) => {
   //Validate the request
   if (!req.body) {
     res.status(400).send({
-      message: "COMES EMPTY"
+      message: "Campos vacios"
     });
   }
   // Create product category
   const product_category = new Product_Category({
-    name: req.body.name,
-    description: req.body.description
+    name: req.body.name
   });
 
   // Save product category
@@ -18,7 +17,7 @@ exports.create = (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "An error has occurred!"
+          err.message || "Ocurrio un error"
       });
     else res.send(data);
   });
@@ -30,7 +29,7 @@ exports.findAll = (req, res) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "An error has occurred!"
+            err.message || "Ocurrio un error"
         });
       else res.send(data);
     });
@@ -40,13 +39,13 @@ exports.findAll = (req, res) => {
     //We obtain the product category with its id
     Product_Category.findById(req.params.product_categoryId, (err, data) => {
       if (err) {
-        if (err.kind === "we have not found the product category") {
+        if (err.kind === "Categoria de producto no encontrada") {
           res.status(404).send({
-            message: `Product Category with id not found ${req.params.product_categoryId}.`
+            message: `Categoria de producto no encontrada con ID ${req.params.product_categoryId}.`
           });
         } else {
           res.status(500).send({
-            message: "Product Category with id not found " + req.params.product_categoryId
+            message: "Categoria de producto no encontrada con ID " + req.params.product_categoryId
           });
         }
       } else res.send(data);
@@ -57,7 +56,7 @@ exports.findAll = (req, res) => {
     // Validating request
     if (!req.body) {
       res.status(400).send({
-        message: "The content cannot go empty!"
+        message: "El contenido no puede ir vacio"
       });
     }
     //update product category with your id
@@ -66,13 +65,13 @@ exports.findAll = (req, res) => {
       new Product_Category(req.body),
       (err, data) => {
         if (err) {
-          if (err.kind === "We can't find the product category to update") {
+          if (err.kind === "No se ha encontrado la categoria de producto a actualizar") {
             res.status(404).send({
-              message: `Product Category with id not found ${req.params.product_categoryId}.`
+              message: `Categoria de producto no encontrada con ID ${req.params.product_categoryId}.`
             });
           } else {
             res.status(500).send({
-              message: "Updating Product Category with id " + req.params.product_categoryId
+              message: "Categoria de producto actualizada con ID " + req.params.product_categoryId
             });
           }
         } else res.send(data);
@@ -83,15 +82,15 @@ exports.findAll = (req, res) => {
   exports.delete = (req, res) => {
     Product_Category.remove(req.params.product_categoryId, (err, data) => {
       if (err) {
-        if (err.kind === "The Product Category you want to remove was not found") {
+        if (err.kind === "La categoria de producto a eliminar no ha sido encontrada") {
           res.status(404).send({
-            message: `Product Category with id not found ${req.params.product_categoryId}.`
+            message: `Categoria de producto no encontrada con ID ${req.params.product_categoryId}.`
           });
         } else {
           res.status(500).send({
-            message: "Could not remove product category with id" + req.params.product_categoryId
+            message: "No se puede eliminar la categoria de producto con ID" + req.params.product_categoryId
           });
         }
-      } else res.send({ message: `Product category has been successfully removed!` });
+      } else res.send({ message: `Categoria de producto eliminada exitosamente` });
     });
   };

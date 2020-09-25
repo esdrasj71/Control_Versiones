@@ -4,13 +4,12 @@ exports.create = (req, res) => {
   //Validate the request
   if (!req.body) {
     res.status(400).send({
-      message: "COMES EMPTY"
+      message: "Campos vacios"
     });
   }
   // Create brand
   const brand = new Brand({
-    name: req.body.name,
-    description: req.body.description
+    name: req.body.name
   });
 
   // Save brand
@@ -18,7 +17,7 @@ exports.create = (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "An error has occurred!"
+          err.message || "Ocurrio un error"
       });
     else res.send(data);
   });
@@ -30,7 +29,7 @@ exports.findAll = (req, res) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "An error has occurred!"
+            err.message || "Ocurrio un error"
         });
       else res.send(data);
     });
@@ -40,13 +39,13 @@ exports.findAll = (req, res) => {
     //We obtain the brand with its id
     Brand.findById(req.params.brandId, (err, data) => {
       if (err) {
-        if (err.kind === "we have not found the brand") {
+        if (err.kind === "No se ha encontrado la marca") {
           res.status(404).send({
-            message: `Brand with id not found ${req.params.brandId}.`
+            message: `Marca con ID no encontrada ${req.params.brandId}.`
           });
         } else {
           res.status(500).send({
-            message: "Brand with id not found " + req.params.brandId
+            message: "Marca con ID encontrada" + req.params.brandId
           });
         }
       } else res.send(data);
@@ -57,7 +56,7 @@ exports.findAll = (req, res) => {
     // Validating request
     if (!req.body) {
       res.status(400).send({
-        message: "The content cannot go empty!"
+        message: "El contenido no puede ir vacio"
       });
     }
     //update brand with your id
@@ -66,13 +65,13 @@ exports.findAll = (req, res) => {
       new Brand(req.body),
       (err, data) => {
         if (err) {
-          if (err.kind === "We can't find the brand to update") {
+          if (err.kind === "No se ha encontrado la marca a actualizar") {
             res.status(404).send({
-              message: `Brand with id not found ${req.params.brandId}.`
+              message: `Marca con ID no encontrada ${req.params.brandId}.`
             });
           } else {
             res.status(500).send({
-              message: "Updating brand with id " + req.params.brandId
+              message: "Actualizando marca con ID " + req.params.brandId
             });
           }
         } else res.send(data);
@@ -83,15 +82,15 @@ exports.findAll = (req, res) => {
   exports.delete = (req, res) => {
     Brand.remove(req.params.brandId, (err, data) => {
       if (err) {
-        if (err.kind === "The brand you want to remove was not found") {
+        if (err.kind === "La marca a eliminar no ha sido encontrada") {
           res.status(404).send({
-            message: `Brand with id not found ${req.params.brandId}.`
+            message: `Marca con ID no encontrada ${req.params.brandId}.`
           });
         } else {
           res.status(500).send({
-            message: "Could not remove brand with id" + req.params.brandId
+            message: "No se puede eliminar marca con ID " + req.params.brandId
           });
         }
-      } else res.send({ message: `Brand has been successfully removed!` });
+      } else res.send({ message: `Marca eliminada exitosamente` });
     });
   };
