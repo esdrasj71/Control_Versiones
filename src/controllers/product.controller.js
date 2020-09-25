@@ -9,16 +9,12 @@ exports.create = (req, res) => {
   }
   // Create Product
   const product = new Product({
+    correlative_product: req.body.correlative_product,
     name: req.body.name,
-    description: req.body.description,
-    unit_price:req.body.unit_price,
-    retail_price:req.body.retail_price,
-    wholesaler_price:req.body.wholesaler_price,
-    perishable:req.body.perishable,
-    due_date:req.body.due_date,
-    creation_date:req.body.creation_date,
-    product_category_id:req.body.product_category_id,
-    brand_id: req.body.brand_id
+    brand_id: req.brand_id,
+    product_category_id: req.product_category_id,
+    perishable: req.perishable,
+    lot_id: req.lot_id,
   });
 
   // Save product
@@ -26,7 +22,7 @@ exports.create = (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "An error has occurred!"
+          err.message || "Ha ocurrido un error"
       });
     else res.send(data);
   });
@@ -38,7 +34,7 @@ exports.findAll = (req, res) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "An error has occurred!"
+            err.message || "Ha ocurrido un error"
         });
       else res.send(data);
     });
@@ -48,13 +44,13 @@ exports.findAll = (req, res) => {
     //We obtain the product with its id
     Product.findById(req.params.productId, (err, data) => {
       if (err) {
-        if (err.kind === "we have not found the product") {
+        if (err.kind === "No se ha encontrado el producto") {
           res.status(404).send({
-            message: `Product with id not found ${req.params.productId}.`
+            message: `Producto no encontrado con ID ${req.params.productId}.`
           });
         } else {
           res.status(500).send({
-            message: "Product with id not found " + req.params.productId
+            message: "Producto no encontrado con ID " + req.params.productId
           });
         }
       } else res.send(data);
@@ -65,7 +61,7 @@ exports.findAll = (req, res) => {
     // Validating request
     if (!req.body) {
       res.status(400).send({
-        message: "The content cannot go empty!"
+        message: "El contenido no puede ir vacio"
       });
     }
     //update product with your id
@@ -74,13 +70,13 @@ exports.findAll = (req, res) => {
       new Product(req.body),
       (err, data) => {
         if (err) {
-          if (err.kind === "We can't find the product to update") {
+          if (err.kind === "No se ha encontrado el producto a actualizar") {
             res.status(404).send({
-              message: `Product with id not found ${req.params.productId}.`
+              message: `Producto no encontrado con ID ${req.params.productId}.`
             });
           } else {
             res.status(500).send({
-              message: "Updating product with id " + req.params.productId
+              message: "Actualizando el producto con ID " + req.params.productId
             });
           }
         } else res.send(data);
@@ -91,15 +87,15 @@ exports.findAll = (req, res) => {
   exports.delete = (req, res) => {
     Product.remove(req.params.productId, (err, data) => {
       if (err) {
-        if (err.kind === "The product you want to remove was not found") {
+        if (err.kind === "El producto que se quiere eliminar no ha sido encontrado") {
           res.status(404).send({
-            message: `Product with id not found ${req.params.productId}.`
+            message: `Producto no encontrado con ID ${req.params.productId}.`
           });
         } else {
           res.status(500).send({
-            message: "Could not remove product with id" + req.params.productId
+            message: "No se puede eliminar el producto con ID" + req.params.productId
           });
         }
-      } else res.send({ message: `Product has been successfully removed!` });
+      } else res.send({ message: `Producto eliminado exitosamente` });
     });
   };

@@ -2,16 +2,12 @@ const sql = require("../conexion.js");
 
 // constructor
 const Product = function(product) {
+  this.correlative_product = product.correlative_product;
   this.name = product.name;
-  this.description = product.description;
-  this.unit_price = product.unit_price;
-  this.retail_price = product.retail_price;
-  this.wholesaler_price = product.wholesaler_price;
-  this.perishable = product.perishable;
-  this.due_date = product.due_date;
-  this.creation_date = product.creation_date;
-  this.product_category_id = product.product_category_id;
   this.brand_id = product.brand_id;
+  this.product_category_id = product.product_category_id;
+  this.perishable = product.perishable;
+  this.lot_id = product.lot_id;
 };
 
 //CRUD
@@ -22,13 +18,13 @@ Product.create = (newProduct, result) => {
       result(err, null);
       return;
     }
-    console.log("created product: ", { id: res.insertId, ...newProduct });
+    console.log("Producto creado: ", { id: res.insertId, ...newProduct });
     result(null, { id: res.insertId, ...newProduct });
   });
 };
 
 Product.findById = (productId, result) => {
-  sql.query(`SELECT * FROM product WHERE id = ${productId}`, (err, res) => {
+  sql.query(`SELECT * FROM product WHERE product_id = ${productId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -36,13 +32,13 @@ Product.findById = (productId, result) => {
     }
 
     if (res.length) {
-      console.log("found product: ", res[0]);
+      console.log("Producto encontrado: ", res[0]);
       result(null, res[0]);
       return;
     }
 
     // not found Product with the id
-    result({ kind: "not_found" }, null);
+    result({ kind: "no encontrado" }, null);
   });
 };
 
@@ -54,15 +50,15 @@ Product.getAll = result => {
       return;
     }
 
-    console.log("products: ", res);
+    console.log("Productos: ", res);
     result(null, res);
   });
 };
 
 Product.updateById = (id, product, result) => {
   sql.query(
-    "UPDATE product SET name = ?, description = ?, unit_price = ?, retail_price = ?, wholesaler_price = ?, perishable = ?, due_date = ?, creation_date = ?, product_category_id = ?, brand_id = ? WHERE id = ?",
-    [product.name, product.description, product.unit_price, product.retail_price, product.wholesaler_price, product.perishable, product.perishable, product.due_date, product.creation_date, product.product_category_id, product.brand_id ,id],
+    "UPDATE product SET correlative_product = ?, name = ?, brand_id = ?, product_category_id = ?, perishable = ?, lot_id = ? WHERE product_id = ?",
+    [product.correlative_product, product.name, product.brand_id, product.product_category_id, product.perishable, product.lot_id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -72,18 +68,17 @@ Product.updateById = (id, product, result) => {
 
       if (res.affectedRows == 0) {
         // not found Product with the id
-        result({ kind: "not_found" }, null);
+        result({ kind: "no encontrado" }, null);
         return;
       }
-
-      console.log("updated product: ", { id: id, ...product });
+      console.log("Producto actualizado: ", { id: id, ...product });
       result(null, { id: id, ...product });
     }
   );
 };
 
 Product.remove = (id, result) => {
-  sql.query("DELETE FROM product WHERE id = ?", id, (err, res) => {
+  sql.query("DELETE FROM product WHERE product_id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -92,11 +87,11 @@ Product.remove = (id, result) => {
 
     if (res.affectedRows == 0) {
       // not found Product with the id
-      result({ kind: "not_found" }, null);
+      result({ kind: "no encontrado" }, null);
       return;
     }
 
-    console.log("deleted product with id: ", id);
+    console.log("Producto eliminado con ID: ", id);
     result(null, res);
   });
 };
@@ -109,7 +104,7 @@ Product.removeAll = result => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} products`);
+    console.log(`Productos ${res.affectedRows} eliminados`);
     result(null, res);
   });
 };
