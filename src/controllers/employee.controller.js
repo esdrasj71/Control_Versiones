@@ -1,24 +1,26 @@
-const Product = require("../models/product.model.js")
+const Employee = require("../models/employee.model.js")
 //SAVE
 exports.create = (req, res) => {
   //Validate the request
   if (!req.body) {
     res.status(400).send({
-      message: "COMES EMPTY"
+      message: "Campos vacios"
     });
   }
-  // Create Product
-  const product = new Product({
-    Name: req.body.Name,
-    Perishable: req.body.Perishable,
-    Correlative_Product: req.body.Correlative_Product,
-    Brand_Id: req.body.Brand_Id,
-    Product_Category_Id: req.body.Product_Category_Id,
-    Lot_Id: req.Lot_Id,
+  // Create Employee
+  const employee = new Employee({
+    DPI: req.body.DPI,
+    Names: req.body.Names,
+    Last_names: req.body.Last_names,
+    Phone_number: req.body.Phone_number,
+    Cellphone_number: req.body.Cellphone_number,
+    Email: req.body.Email,
+    Gender: req.body.Gender,
+    Hire_date: req.body.Hire_date
   });
 
-  // Save product
-  Product.create(product, (err, data) => {
+  // Save Employee
+  Employee.create(employee, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -30,7 +32,7 @@ exports.create = (req, res) => {
 //GET ALL
 exports.findAll = (req, res) => {
     //Get all supplier data
-    Product.getAll((err, data) => {
+    Employee.getAll((err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -41,16 +43,16 @@ exports.findAll = (req, res) => {
   };
 //GET ONE
   exports.findOne = (req, res) => {
-    //We obtain the product with its id
-    Product.findById(req.params.productId, (err, data) => {
+    //We obtain the employee with its id
+    Employee.findById(req.params.employeeId, (err, data) => {
       if (err) {
-        if (err.kind === "No se ha encontrado el producto") {
+        if (err.kind === "No se ha encontrado el empleado") {
           res.status(404).send({
-            message: `Producto no encontrado con ID ${req.params.productId}.`
+            message: `Empleado no encontrado con ID ${req.params.employeeId}.`
           });
         } else {
           res.status(500).send({
-            message: "Producto no encontrado con ID " + req.params.productId
+            message: "Empleado no encontrado con ID " + req.params.employeeId
           });
         }
       } else res.send(data);
@@ -64,19 +66,19 @@ exports.findAll = (req, res) => {
         message: "El contenido no puede ir vacio"
       });
     }
-    //update product with your id
-    Product.updateById(
-      req.params.productId,
-      new Product(req.body),
+    //update Employee with your id
+    Employee.updateById(
+      req.params.employeeId,
+      new Employee(req.body),
       (err, data) => {
         if (err) {
-          if (err.kind === "No se ha encontrado el producto a actualizar") {
+          if (err.kind === "No se ha encontrado el empleado a actualizar") {
             res.status(404).send({
-              message: `Producto no encontrado con ID ${req.params.productId}.`
+              message: `Empleado no encontrado con ID ${req.params.employeeId}.`
             });
           } else {
             res.status(500).send({
-              message: "Actualizando el producto con ID " + req.params.productId
+              message: "Actualizando el empleado con ID " + req.params.employeeId
             });
           }
         } else res.send(data);
@@ -85,17 +87,17 @@ exports.findAll = (req, res) => {
   };
 //DELETE
   exports.delete = (req, res) => {
-    Product.remove(req.params.productId, (err, data) => {
+    Employee.remove(req.params.employeeId, (err, data) => {
       if (err) {
-        if (err.kind === "El producto que se quiere eliminar no ha sido encontrado") {
+        if (err.kind === "El Empleado que se quiere eliminar no ha sido encontrado") {
           res.status(404).send({
-            message: `Producto no encontrado con ID ${req.params.productId}.`
+            message: `Empleado no encontrado con ID ${req.params.employeeId}.`
           });
         } else {
           res.status(500).send({
-            message: "No se puede eliminar el producto con ID" + req.params.productId
+            message: "No se puede eliminar el empleado con ID" + req.params.employeeId
           });
         }
-      } else res.send({ message: `Producto eliminado exitosamente` });
+      } else res.send({ message: `Empleado eliminado exitosamente` });
     });
   };
