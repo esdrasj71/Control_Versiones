@@ -9,12 +9,12 @@ exports.create = (req, res) => {
   }
   // Create provider
   const providers = new Providers({
-    nit: req.body.nit,
-    fiscal_name: req.body.fiscal_name,
-    phone_number1:req.body.phone_number1,
-    phone_number2:req.body.phone_number2,
-    email:req.body.email,
-    address:req.body.address
+    NIT: req.body.NIT,
+    Fiscal_Name: req.body.Fiscal_Name,
+    Phone_Number1:req.body.Phone_Number1,
+    Phone_Number2:req.body.Phone_Number2,
+    Email:req.body.Email,
+    Address:req.body.Address
   });
 
   // Save provider

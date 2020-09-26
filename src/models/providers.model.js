@@ -2,12 +2,12 @@ const sql = require("../conexion.js");
 
 // constructor
 const Providers = function(providers) {
-  this.nit = providers.nit;
-  this.fiscal_name= providers.fiscal_name;
-  this.phone_number1=providers.phone_number1;
-  this.phone_number2=providers.phone_number2;
-  this.email=providers.email;
-  this.address=providers.address;
+  this.NIT = providers.NIT;
+  this.Fiscal_Name= providers.Fiscal_Name;
+  this.Phone_Number1=providers.Phone_Number1;
+  this.Phone_Number2=providers.Phone_Number2;
+  this.Email=providers.Email;
+  this.Address=providers.Address;
 };
 //CRUD
 Providers.create = (newProviders, result) => {
@@ -23,7 +23,7 @@ Providers.create = (newProviders, result) => {
   };
 
   Providers.findById = (providersId, result) => {
-    sql.query(`SELECT * FROM providers WHERE id_providers = ${providersId}`, (err, res) => {
+    sql.query(`SELECT * FROM providers WHERE providers_id = ${providersId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -56,8 +56,8 @@ Providers.create = (newProviders, result) => {
 
   Providers.updateById = (id, providers, result) => {
     sql.query(
-      "UPDATE providers SET nit = ?, fiscal_name = ?, phone_number1 = ?, phone_number2 = ?, email = ?, address = ? WHERE id_providers = ?",
-      [providers.nit, providers.fiscal_name, providers.phone_number1,providers.phone_number2, providers.email, providers.address, id],
+      "UPDATE providers SET nit = ?, fiscal_name = ?, phone_number1 = ?, phone_number2 = ?, email = ?, address = ? WHERE providers_id = ?",
+      [providers.NIT, providers.Fiscal_Name, providers.Phone_Number1,providers.Phone_Number2, providers.Email, providers.Address, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -78,7 +78,7 @@ Providers.create = (newProviders, result) => {
   };
 
   Providers.remove = (id, result) => {
-    sql.query("DELETE FROM providers WHERE id_providers = ?", id, (err, res) => {
+    sql.query("DELETE FROM providers WHERE providers_id = ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
