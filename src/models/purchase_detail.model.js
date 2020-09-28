@@ -4,7 +4,6 @@ const Purchase_Detail = function(purchase_detail){
     this.Quantity = purchase_detail.Quantity;
     this.Unit_Price = purchase_detail.Unit_Price;
     this.Subtotal = purchase_detail.Subtotal;
-    this.Refund = purchase_detail.Refund;
     this.Purchase_Header_Id = purchase_detail.Purchase_Header_Id;
     this.Inventory_Id = purchase_detail.Inventory_Id;
 };
@@ -55,8 +54,8 @@ Purchase_Detail.getAll = result => {
 
 //ACTUALIZA ID
 Purchase_Detail.updateById = (id, purchaseDetail, result) => {
-    sql.query("UPDATE purchase_detail SET Quantity = ?, Unit_Price = ?, Subtotal = ?, Refund = ?, Purchase_Header_Id = ?, Inventory_Id = ?  WHERE Purchase_Detail_Id = ?",
-      [purchaseDetail.Quantity, purchaseDetail.Unit_Price, purchaseDetail.Subtotal, purchaseDetail.Refund, purchaseDetail.Purchase_Header_Id , purchaseDetail.Inventory_Id, id],
+    sql.query("UPDATE purchase_detail SET Quantity = ?, Unit_Price = ?, Subtotal = ?, Purchase_Header_Id = ?, Inventory_Id = ?  WHERE Purchase_Detail_Id = ?",
+      [purchaseDetail.Quantity, purchaseDetail.Unit_Price, purchaseDetail.Subtotal, purchaseDetail.Purchase_Header_Id , purchaseDetail.Inventory_Id, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

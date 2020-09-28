@@ -2,6 +2,7 @@ const sql = require("../conexion.js");
 
 // constructor
 const Customers = function(customers) {
+  this.DPI = customers.DPI;
   this.Names = customers.Names;
   this.Last_names = customers.Last_names;
   this.NIT = customers.NIT;
@@ -55,8 +56,8 @@ Customers.getAll = result => {
 
 Customers.updateById = (id, customer, result) => {
   sql.query(
-    "UPDATE customers SET Names = ?, Last_Names = ?, NIT = ?, Direccion = ? WHERE Customers_Id = ?",
-    [customer.Names, customer.Last_names, customer.NIT, customer.Direccion, id],
+    "UPDATE customers SET DPI = ?, Names = ?, Last_Names = ?, NIT = ?, Direccion = ? WHERE Customers_Id = ?",
+    [customer.DPI, customer.Names, customer.Last_names, customer.NIT, customer.Direccion, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

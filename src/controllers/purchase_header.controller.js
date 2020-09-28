@@ -14,8 +14,8 @@ exports.create = (req, res) => {
     Date_Purchase: req.body.Date_Purchase,
     Total: req.body.Total,
     Refund:req.body.Refund,
-    Observations:req.body.Observations,
     Annulment_State:req.body.Annulment_State,
+    Observations:req.body.Observations,
     Providers_Id:req.body.Providers_Id
   });
 
