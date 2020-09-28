@@ -14,7 +14,6 @@ exports.create = (req, res) => {
     Correlative_Product: req.body.Correlative_Product,
     Brand_Id: req.body.Brand_Id,
     Product_Category_Id: req.body.Product_Category_Id,
-    Lot_Id: req.Lot_Id,
   });
 
   // Save product

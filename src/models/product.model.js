@@ -7,7 +7,6 @@ const Product = function(product) {
   this.Correlative_Product = product.Correlative_Product;
   this.Brand_Id = product.Brand_Id;
   this.Product_Category_Id = product.Product_Category_Id;
-  this.Lot_Id = product.Lot_Id;
 };
 
 //CRUD
@@ -57,8 +56,8 @@ Product.getAll = result => {
 
 Product.updateById = (id, product, result) => {
   sql.query(
-    "UPDATE product SET Name = ?, Perishable = ?, Correlative_Product = ?, Brand_Id = ?, Product_Category_Id = ?, Lot_Id = ? WHERE Product_Id = ?",
-    [product.Name, product.Perishable, product.Correlative_Product, product.Brand_Id, product.Product_Category_Id, product.Lot_Id, id],
+    "UPDATE product SET Name = ?, Perishable = ?, Correlative_Product = ?, Brand_Id = ?, Product_Category_Id = ? WHERE Product_Id = ?",
+    [product.Name, product.Perishable, product.Correlative_Product, product.Brand_Id, product.Product_Category_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
