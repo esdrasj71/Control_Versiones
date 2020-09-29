@@ -4,6 +4,7 @@ const sql = require("../conexion.js");
 const Inventory = function(inventory) {
   this.Stock = inventory.Stock;
   this.Unit_Price = inventory.Unit_Price;
+  this.Stock = inventory.Stock;
   this.Retail_Price = inventory.Retail_Price;
   this.Wholesale_Price = inventory.Wholesale_Price;
   this.Presentation_Id = inventory.Presentation_Id;
@@ -24,7 +25,7 @@ Inventory.create = (newInventory, result) => {
 };
 
 Inventory.findById = (Inventario_Id, result) => {
-  sql.query(`SELECT * FROM inventory WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
+  sql.query(`i.Inventory_Id, pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = i.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id  WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -43,7 +44,7 @@ Inventory.findById = (Inventario_Id, result) => {
 };
 
 Inventory.getAll = result => {
-  sql.query("SELECT i.Inventory_Id, pp.Name as Product, p.Name as Presentation, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = i.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id ", (err, res) => {
+  sql.query("SELECT i.Inventory_Id, pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = i.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id ", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
