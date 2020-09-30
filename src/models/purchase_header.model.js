@@ -6,8 +6,8 @@ const Purchase_Header = function(purchase_header){
     this.Date_Purchase = purchase_header.Date_Purchase;
     this.Total = purchase_header.Total;
     this.Refund = purchase_header.Refund; 
-    this.Observations = purchase_header.Observations;
     this.Annulment_State = purchase_header.Annulment_State;
+    this.Observations = purchase_header.Observations;
     this.Providers_Id = purchase_header.Providers_Id;
 };
 //Creacion de CRUD
@@ -57,8 +57,8 @@ Purchase_Header.getAll = result => {
 
 //ACTUALIZA ID
 Purchase_Header.updateById = (id, purchaseHeader, result) => {
-    sql.query("UPDATE purchase_header SET Correlative_Number = ?, Serie = ? Date_Purchase = ?, Total = ?, Refund = ?, Observations = ?, Annualment_State =?, Providers_Id = ?  WHERE Purchase_Header_Id = ?",
-      [purchaseHeader.Correlative_Number, purchaseHeader.Serie, purchaseHeader.Date_Purchase, purchaseHeader.Total, purchaseHeader.Refund, purchaseHeader.Observations, purchaseHeader.Annulment_State, purchaseHeader.Providers_Id, id],
+    sql.query("UPDATE purchase_header SET Correlative_Number = ?, Serie = ? Date_Purchase = ?, Total = ?, Refund = ?, Annualment_State =?, Observations = ?, Providers_Id = ?  WHERE Purchase_Header_Id = ?",
+      [purchaseHeader.Correlative_Number, purchaseHeader.Serie, purchaseHeader.Date_Purchase, purchaseHeader.Total, purchaseHeader.Refund, purchaseHeader.Annulment_State, purchaseHeader.Observations, purchaseHeader.Providers_Id, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

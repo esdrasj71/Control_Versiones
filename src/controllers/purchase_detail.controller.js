@@ -12,7 +12,6 @@ exports.create = (req, res) => {
     Quantity: req.body.Quantity,
     Unit_Price: req.body.Unit_Price,
     Subtotal: req.body.Subtotal,
-    Refund: req.body.Refund,
     Purchase_Header_Id:req.body.Observations,
     Inventory_Id:req.body.Inventory_Id
   });
