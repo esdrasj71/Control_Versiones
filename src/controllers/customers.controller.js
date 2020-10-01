@@ -9,7 +9,7 @@ exports.create = (req, res) => {
   }
   // Create Customer
   const customers = new Customers({
-    DPI : req.bodu.DPI,
+    DPI : req.body.DPI,
     Names: req.body.Names,
     Last_names: req.body.Last_names,
     NIT:req.body.NIT,
