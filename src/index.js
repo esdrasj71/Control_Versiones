@@ -27,6 +27,7 @@ require("./routes/purchase_header.routes")(app);
 require("./routes/purchase_detail.routes")(app);
 require("./routes/customers.routes")(app);
 require("./routes/employee.routes")(app);
+require("./routes/employee_position.routes")(app);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
