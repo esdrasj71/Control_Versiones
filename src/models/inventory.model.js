@@ -25,7 +25,7 @@ Inventory.create = (newInventory, result) => {
 };
 
 Inventory.findById = (Inventario_Id, result) => {
-  sql.query(`SELECT i.Inventory_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
+  sql.query(`Select i.Inventory_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
