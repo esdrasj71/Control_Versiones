@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     Stock: req.body.Stock,
     Unit_Price:req.body.Unit_Price,
     Retail_Price:req.body.Retail_Price,
-    Wholesaler_Price:req.body.Wholesaler_Price,
+    Wholesale_Price:req.body.Wholesale_Price,
     Presentation_Id:req.body.Presentation_Id,
     Product_Id: req.body.Product_Id
   });
