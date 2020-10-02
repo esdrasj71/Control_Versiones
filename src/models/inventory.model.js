@@ -58,8 +58,8 @@ Inventory.getAll = result => {
 
 Inventory.updateById = (id, inventario, result) => {
   sql.query(
-    "UPDATE inventario SET Stock = ?, Unit_Price = ?, Retail_Price = ?, Wholesaler_Price = ?, Presentation_Id, Product_Id = ? WHERE Inventory_Id = ?",
-    [inventario.Stock, inventario.Unit_Price, inventario.Retail_Price, inventario.Wholesaler_Price, inventario.Presentation_Id, inventario.Product_Id, id],
+    "UPDATE inventory SET Stock = ?, Unit_Price = ?, Retail_Price = ?, Wholesale_Price = ?, Presentation_Id = ?, Product_Id = ? WHERE Inventory_Id = ?",
+    [inventario.Stock, inventario.Unit_Price, inventario.Retail_Price, inventario.Wholesale_Price, inventario.Presentation_Id, inventario.Product_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
