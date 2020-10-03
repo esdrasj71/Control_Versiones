@@ -8,7 +8,7 @@ exports.create = (req, res) => {
     });
   }
   // Create brand
-  const brand = new Brand({
+  const brand = new Brand({ 
     Name: req.body.Name
   });
 
