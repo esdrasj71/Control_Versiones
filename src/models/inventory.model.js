@@ -25,7 +25,9 @@ Inventory.create = (newInventory, result) => {
 };
 
 Inventory.findById = (Inventario_Id, result) => {
-  sql.query(` i.Inventory_Id, pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
+
+  sql.query(`SELECT i.Inventory_Id, pp.Product_Id as Product_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
+
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -44,7 +46,7 @@ Inventory.findById = (Inventario_Id, result) => {
 };
 
 Inventory.getAll = result => {
-  sql.query("SELECT i.Inventory_Id, pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id ", (err, res) => {
+  sql.query("SELECT i.Inventory_Id, pp.Product_Id as Product_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -58,8 +60,8 @@ Inventory.getAll = result => {
 
 Inventory.updateById = (id, inventario, result) => {
   sql.query(
-    "UPDATE inventario SET Stock = ?, Unit_Price = ?, Retail_Price = ?, Wholesaler_Price = ?, Presentation_Id, Product_Id = ? WHERE Inventory_Id = ?",
-    [inventario.Stock, inventario.Unit_Price, inventario.Retail_Price, inventario.Wholesaler_Price, inventario.Presentation_Id, inventario.Product_Id, id],
+    "UPDATE inventory SET Stock = ?, Unit_Price = ?, Retail_Price = ?, Wholesale_Price = ?, Presentation_Id = ?, Product_Id = ? WHERE Inventory_Id = ?",
+    [inventario.Stock, inventario.Unit_Price, inventario.Retail_Price, inventario.Wholesale_Price, inventario.Presentation_Id, inventario.Product_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
