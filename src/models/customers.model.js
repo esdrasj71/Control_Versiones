@@ -6,7 +6,7 @@ const Customers = function(customers) {
   this.Names = customers.Names;
   this.Last_names = customers.Last_names;
   this.NIT = customers.NIT;
-  this.Direccion = customers.Direccion;
+  this.Address = customers.Adress;
 };
 
 //CRUD
@@ -56,8 +56,8 @@ Customers.getAll = result => {
 
 Customers.updateById = (id, customer, result) => {
   sql.query(
-    "UPDATE customers SET DPI = ?, Names = ?, Last_Names = ?, NIT = ?, Direccion = ? WHERE Customers_Id = ?",
-    [customer.DPI, customer.Names, customer.Last_names, customer.NIT, customer.Direccion, id],
+    "UPDATE customers SET DPI = ?, Names = ?, Last_Names = ?, NIT = ?, Address = ? WHERE Customers_Id = ?",
+    [customer.DPI, customer.Names, customer.Last_names, customer.NIT, customer.Address, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
