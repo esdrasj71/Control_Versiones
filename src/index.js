@@ -22,7 +22,6 @@ require("./routes/product_category.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/lot.routes")(app);
 require("./routes/inventory.routes")(app);
-require("./routes/presentation.routes")(app);
 require("./routes/purchase_header.routes")(app);
 require("./routes/purchase_detail.routes")(app);
 require("./routes/customers.routes")(app);
