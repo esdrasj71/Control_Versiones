@@ -27,7 +27,13 @@ require("./routes/purchase_detail.routes")(app);
 require("./routes/customers.routes")(app);
 require("./routes/employee.routes")(app);
 require("./routes/employee_position.routes")(app);
+require("./routes/bill_header.routes")(app);
+require("./routes/bill_detail.routes")(app); 
 require("./routes/procedure_purchase.routes")(app);
+require("./routes/procedure_sale.routes")(app);
+require("./routes/payment_purchase.routes")(app);
+require("./routes/payment_detail_purchase.routes")(app);
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
 });

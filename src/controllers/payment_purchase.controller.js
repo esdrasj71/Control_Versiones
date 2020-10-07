@@ -1,4 +1,4 @@
-const Brand = require("../models/brand.model.js")
+const Payment_Purchase = require("../models/payment_purchase.model.js")
 //SAVE
 exports.create = (req, res) => {
   //Validate the request
@@ -8,12 +8,12 @@ exports.create = (req, res) => {
     });
   }
   // Create brand
-  const brand = new Brand({ 
-    Name: req.body.Name
+  const payment_purchase = new Payment_Purchase({ 
+    Method_Name: req.body.Method_Name
   });
 
   // Save brand
-  Brand.create(brand, (err, data) => {
+  Payment_Purchase.create(payment_purchase, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -24,8 +24,7 @@ exports.create = (req, res) => {
 };
 //GET ALL
 exports.findAll = (req, res) => {
-    //Get all brand data
-    Brand.getAll((err, data) => {
+    Payment_Purchase.getAll((err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -34,18 +33,17 @@ exports.findAll = (req, res) => {
       else res.send(data);
     });
   };
-//GET ONE
   exports.findOne = (req, res) => {
     //We obtain the brand with its id
-    Brand.findById(req.params.brandId, (err, data) => {
+    Payment_Purchase.findById(req.params.Payment_Purchase_Id, (err, data) => {
       if (err) {
-        if (err.kind === "No se ha encontrado la marca") {
+        if (err.kind === "No se ha encontrado el compra de pago") {
           res.status(404).send({
-            message: `Marca con ID no encontrada ${req.params.brandId}.`
+            message: `Compra de pago con ID no encontrada ${req.params.Payment_Purchase_Id}.`
           });
         } else {
           res.status(500).send({
-            message: "Marca con ID encontrada" + req.params.brandId
+            message: "Compra de pago con ID encontrada" + req.params.Payment_Purchase_Id
           });
         }
       } else res.send(data);
@@ -60,18 +58,18 @@ exports.findAll = (req, res) => {
       });
     }
     //update brand with your id
-    Brand.updateById(
-      req.params.brandId,
-      new Brand(req.body),
+    Payment_Purchase.updateById(
+      req.params.Payment_Purchase_Id,
+      new Payment_Purchase(req.body),
       (err, data) => {
         if (err) {
-          if (err.kind === "No se ha encontrado la marca a actualizar") {
+          if (err.kind === "No se ha encontrado el compra de pago a a actualizar") {
             res.status(404).send({
-              message: `Marca con ID no encontrada ${req.params.brandId}.`
+              message: `Compra de pago con ID no encontrada ${req.params.Payment_Purchase_Id}.`
             });
           } else {
             res.status(500).send({
-              message: "Actualizando marca con ID " + req.params.brandId
+              message: "Actualizando compra de pago con ID " + req.params.Payment_Purchase_Id
             });
           }
         } else res.send(data);
@@ -80,17 +78,17 @@ exports.findAll = (req, res) => {
   };
 //DELETE
   exports.delete = (req, res) => {
-    Brand.remove(req.params.brandId, (err, data) => {
+    Payment_Purchase.remove(req.params.Payment_Purchase_Id, (err, data) => {
       if (err) {
-        if (err.kind === "La marca a eliminar no ha sido encontrada") {
+        if (err.kind === "Compra de pago a eliminar no ha sido encontrada") {
           res.status(404).send({
-            message: `Marca con ID no encontrada ${req.params.brandId}.`
+            message: `Compra de pago con ID no encontrada ${req.params.Payment_Purchase_Id}.`
           });
         } else {
           res.status(500).send({
-            message: "No se puede eliminar marca con ID " + req.params.brandId
+            message: "No se puede eliminar compra de pago con ID " + req.params.Payment_Purchase_Id
           });
         }
-      } else res.send({ message: `Marca eliminada exitosamente` });
+      } else res.send({ message: `Compra de pago eliminada exitosamente` });
     });
   };

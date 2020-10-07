@@ -12,8 +12,9 @@ exports.create = (req, res) => {
     DPI : req.body.DPI,
     Names: req.body.Names,
     Last_names: req.body.Last_names,
+    Phone_Number: req.body.Phone_Number,
     NIT:req.body.NIT,
-    Direccion:req.body.Direccion
+    Address:req.body.Address
   });
 
   // Save product
