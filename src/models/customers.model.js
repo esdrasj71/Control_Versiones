@@ -7,7 +7,7 @@ const Customers = function (customers) {
   this.Last_names = customers.Last_names;
   this.Phone_Number = customers.Phone_Number;
   this.NIT = customers.NIT;
-  this.Address = customers.Adress;
+  this.Address = customers.Address;
 };
 
 //CRUD
