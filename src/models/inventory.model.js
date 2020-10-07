@@ -7,7 +7,6 @@ const Inventory = function(inventory) {
   this.Stock = inventory.Stock;
   this.Retail_Price = inventory.Retail_Price;
   this.Wholesale_Price = inventory.Wholesale_Price;
-  this.Presentation_Id = inventory.Presentation_Id;
   this.Product_Id = inventory.Product_Id;
 };
 
@@ -25,7 +24,7 @@ Inventory.create = (newInventory, result) => {
 };
 
 Inventory.findById = (Inventario_Id, result) => {
-sql.query(`SELECT i.Inventory_Id, pp.Product_Id as Product_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, p.Presentation_Id as Presentation_Id ,p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
+sql.query(`SELECT i.Inventory_Id, pp.Product_Id as Product_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join product as pp on i.Product_Id = pp.Product_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
 
 
     if (err) {
@@ -46,7 +45,7 @@ sql.query(`SELECT i.Inventory_Id, pp.Product_Id as Product_Id, pp.Correlative_Pr
 };
 
 Inventory.getAll = result => {
-  sql.query("SELECT i.Inventory_Id, pp.Product_Id as Product_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, p.Presentation_Id as Presentation_Id ,p.Name as Presentation, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join presentation as p on i.Presentation_Id = p.Presentation_Id inner join product as pp on i.Product_Id = pp.Product_Id", (err, res) => {
+  sql.query("SELECT i.Inventory_Id, pp.Product_Id as Product_Id, pp.Correlative_Product as Correlative_Product ,pp.Name as Product, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price FROM inventory as i inner join product as pp on i.Product_Id = pp.Product_Id", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -60,8 +59,8 @@ Inventory.getAll = result => {
 
 Inventory.updateById = (id, inventario, result) => {
   sql.query(
-    "UPDATE inventory SET Stock = ?, Unit_Price = ?, Retail_Price = ?, Wholesale_Price = ?, Presentation_Id = ?, Product_Id = ? WHERE Inventory_Id = ?",
-    [inventario.Stock, inventario.Unit_Price, inventario.Retail_Price, inventario.Wholesale_Price, inventario.Presentation_Id, inventario.Product_Id, id],
+    "UPDATE inventory SET Stock = ?, Unit_Price = ?, Retail_Price = ?, Wholesale_Price = ?, Product_Id = ? WHERE Inventory_Id = ?",
+    [inventario.Stock, inventario.Unit_Price, inventario.Retail_Price, inventario.Wholesale_Price, inventario.Product_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     Names: req.body.Names,
     Last_names: req.body.Last_names,
     NIT:req.body.NIT,
-    Direccion:req.body.Direccion
+    Address:req.body.Address
   });
 
   // Save product

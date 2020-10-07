@@ -8,6 +8,7 @@ const Bill_Header = function(bill_header) {
   this.Total = bill_header.Total;
   this.Refund = bill_header.Refund;
   this.Annulment_State = bill_header.Annulment_State;
+  this.Payment_Complete = bill_header.Payment_Complete;
   this.Customers_Id = bill_header.Customers_Id;
   this.Employee_Id = bill_header.Employee_Id;
 };
@@ -57,8 +58,8 @@ Bill_Header.getAll = result => {
 
 Bill_Header.updateById = (id, bill_header, result) => {
   sql.query(
-    "UPDATE bill_header SET Correlative_Number = ?, Serie = ?, Date = ?, Total = ?, Refund = ?, Annulment_State = ?, Customers_Id = ?, Employee_Id = ? WHERE Bill_Header_Id = ?",
-    [bill_header.Correlative_Number, bill_header.Serie, bill_header.Date, bill_header.Total, bill_header.Refund, bill_header.Annulment_State, bill_header.Customers_Id, bill_header.Employee_Id, id],
+    "UPDATE bill_header SET Correlative_Number = ?, Serie = ?, Date = ?, Total = ?, Refund = ?, Annulment_State = ?, Payment_Complete = ?,Customers_Id = ?, Employee_Id = ? WHERE Bill_Header_Id = ?",
+    [bill_header.Correlative_Number, bill_header.Serie, bill_header.Date, bill_header.Total, bill_header.Refund, bill_header.Annulment_State, bill_header.Payment_Complete, bill_header.Customers_Id, bill_header.Employee_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
