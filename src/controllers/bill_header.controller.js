@@ -1,4 +1,5 @@
 const Bill_Header = require("../models/bill_header.model.js")
+const proedure_sales = require("../models/procedure_sales.model")
 //SAVE
 exports.create = (req, res) => {
   //Validate the request
@@ -16,9 +17,22 @@ exports.create = (req, res) => {
     Refund: req.body.Refund,
     Annulment_State: req.body.Annulment_State,
     Customers_Id: req.body.Customers_Id,
-    Employee_Id: req.body.Employee_Id
+    Employee_Id: parseInt( req.body.Employee_Id)
   });
-
+  const Procedure_Sales = new proedure_sales({
+    Correlative_Number: req.body.Correlative_Number,
+    Serie: req.body.Serie,
+    Date: req.body.Date,
+    Total: req.body.Total,
+    Refund: req.body.Refund,
+    Annulment_State: req.body.Annulment_State,
+    Customers_Id: req.body.Customers_Id,
+    Employee_Id: req.body.Employee_Id,
+    Subtotal: req.body.Subtotal,
+    Quantity: req.body.Quantity,
+    Price: req.body.Price,
+    Iventory_Id: req.body.Iventory_Id
+  })
   // Save bill header
   Bill_Header.create(bill_header, (err, data) => {
     if (err)
