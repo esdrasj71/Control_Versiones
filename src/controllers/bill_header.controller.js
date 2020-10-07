@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     Total: req.body.Total,
     Refund: req.body.Refund,
     Annulment_State: req.body.Annulment_State,
+    Payment_Complete: req.body.Payment_Complete,
     Customers_Id: req.body.Customers_Id,
     Employee_Id: parseInt( req.body.Employee_Id)
   });
