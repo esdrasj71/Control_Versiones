@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     Total_Amount: req.body.Total_Amount,
     Description: req.body.Description,
     Payment_Id: req.body.Payment_Id,
-    Bill_Header_Id: req.body.Bill_Header_Id
+    Bill_header_Id: req.body.Bill_header_Id
   });
 
   // Save payment type detail

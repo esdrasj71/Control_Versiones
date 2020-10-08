@@ -5,7 +5,7 @@ const Payment_Type_Detail = function(payment_type_detail) {
   this.Total_Amount = payment_type_detail.Total_Amount;
   this.Description = payment_type_detail.Description;
   this.Payment_Id = payment_type_detail.Payment_Id;
-  this.Bill_Header_Id = payment_type_detail.Bill_Header_Id;
+  this.Bill_header_Id = payment_type_detail.Bill_header_Id;
 };
 
 //CRUD
@@ -53,8 +53,8 @@ Payment_Type_Detail.findById = (PaymentDetailId, result) => {
 
 Payment_Type_Detail.updateById = (id, paymentDetail, result) => {
   sql.query(
-    "UPDATE payment_type_detail SET Total_Amount = ?, Description = ?, Payment_Id = ?, Bill_Header_Id = ? WHERE Type_Detail_Id = ?",
-    [paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Payment_Id, paymentDetail.Bill_Header_Id, id],
+    "UPDATE payment_type_detail SET Total_Amount = ?, Description = ?, Payment_Id = ?, Bill_header_Id = ? WHERE Type_Detail_Id = ?",
+    [paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Payment_Id, paymentDetail.Bill_header_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
