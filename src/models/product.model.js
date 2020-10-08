@@ -23,7 +23,7 @@ Product.create = (newProduct, result) => {
 };
 
 Product.findById = (productId, result) => {
-  sql.query(`SELECT p.Product_Id, p.Name , b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id WHERE product_id = ${productId}`, (err, res) => {
+  sql.query(`SELECT p.Product_Id, p.Brand_Id, p.Product_Category_Id, ,p.Name , b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id WHERE product_id = ${productId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -42,7 +42,7 @@ Product.findById = (productId, result) => {
 };
 
 Product.getAll = result => {
-  sql.query("SELECT p.Product_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id", (err, res) => {
+  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
