@@ -9,7 +9,7 @@ const Procedure_Purchase = function(procedure_purchase){
 
 Procedure_Purchase.create = (newPurchase, result) => {
     sql.query("CALL compra(?,?,?,?);", 
-    [newPurchase.Quantity,newPurchase.Unit_Price,newPurchase.Subtotal,newPurchase.Inventory_Id], (err, res)=>{
+    [newPurchase.Inventory_Id,newPurchase.Quantity,newPurchase.Unit_Price,newPurchase.Subtotal], (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
