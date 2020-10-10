@@ -29,7 +29,6 @@ Product.findById = (productId, result) => {
       result(err, null);
       return;
     }
-
     if (res.length) {
       console.log("Producto encontrado: ", res[0]);
       result(null, res[0]);
