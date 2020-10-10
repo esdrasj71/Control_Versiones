@@ -23,23 +23,6 @@ Product.create = (newProduct, result) => {
 };
 
 Product.findById = (productId, result) => {
-  sql.query(`SELECT p.Product_Id, p.Brand_Id, p.Product_Category_Id ,p.Name , b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id WHERE Product_Id = ${productId}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-
-    if (res.length) {
-      console.log("Producto encontrado: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-
-    // not found Product with the id
-    result({ kind: "no encontrado" }, null);
-  });
-
   sql.query(`SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, concat(p.Name, ' ' ,b.Name, ' ', pc.Name) as Complete FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id WHERE product_id = ${productId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -52,7 +35,6 @@ Product.findById = (productId, result) => {
       result(null, res[0]);
       return;
     }
-
     // not found Product with the id
     result({ kind: "no encontrado" }, null);
   });
