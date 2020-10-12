@@ -2,7 +2,7 @@ const sql = require("../conexion");
 //constructor
 const Lot = function(lot){
     this.Due_Date = lot.Due_Date;
-    this.Inventory_Id = lot.Inventory_Id;
+    this.Product_Id = lot.Product_Id;
 };
 //Creacion de CRUD
     //CREATE
@@ -19,7 +19,7 @@ Lot.create = (newLot, result) => {
 };
     //BUSCAR POR ID
 Lot.findById = (lote_id, result) => {
-    sql.query(`SELECT l.Lot_Id, p.Name, l.Due_Date FROM lot as l inner join inventory as i on l.Inventory_Id = i.Inventory_Id inner join product as p on p.Product_Id = i.Inventory_Id WHERE lot_id = ${lote_id}`, (err,res)=>{
+    sql.query(`SELECT l.Lot_Id, p.Name, l.Due_Date FROM lot as l inner join product as p on l.Product_Id = p.Product_Id WHERE lot_id = ${lote_id}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -37,7 +37,7 @@ Lot.findById = (lote_id, result) => {
 };
 //BUSCAR TODO
 Lot.getAll = result => {
-    sql.query("SELECT l.Lot_Id, p.Name, l.Due_Date FROM lot as l inner join inventory as i on l.Inventory_Id = i.Inventory_Id inner join product as p on p.Product_Id = i.Inventory_Id ORDER BY Due_Date ASC", (err, res) => {
+    sql.query("SELECT l.Lot_Id, p.Name, l.Due_Date FROM lot as l inner join product as p on l.Product_Id = p.Product_Id ORDER BY Due_Date ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -51,8 +51,8 @@ Lot.getAll = result => {
 
 //ACTUALIZA ID
 Lot.updateById = (id, lot, result) => {
-    sql.query("UPDATE lot SET due_date = ?, inventory_id = ? WHERE lot_id = ?",
-      [lot.Due_Date, lot.Inventory_Id, id],
+    sql.query("UPDATE lot SET due_date = ?, product_id = ? WHERE lot_id = ?",
+      [lot.Due_Date, lot.Product_Id, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

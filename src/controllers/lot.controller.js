@@ -10,7 +10,7 @@ exports.create = (req, res) => {
   // Create brand
   const lot = new Lot({
     Due_Date: req.body.Due_Date,
-    Inventory_Id: req.body.Inventory_Id
+    Product_Id: req.body.Product_Id
   });
 
   // Save brand

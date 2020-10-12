@@ -19,6 +19,4 @@ Procedure_Purchase.create = (newPurchase, result) => {
         result(null, {...newPurchase});
     });
 };
-
-
 module.exports = Procedure_Purchase;
