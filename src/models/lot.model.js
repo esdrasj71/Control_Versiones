@@ -19,7 +19,7 @@ Lot.create = (newLot, result) => {
 };
     //BUSCAR POR ID
 Lot.findById = (lote_id, result) => {
-    sql.query(`SELECT * FROM lot WHERE lot_id = ${lote_id}`, (err,res)=>{
+    sql.query(`SELECT l.Lot_Id, p.Name as Product, l.Due_Date FROM lot as l inner join product as p on l.Product_Id = p.Product_Id WHERE lot_id = ${lote_id}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -37,7 +37,7 @@ Lot.findById = (lote_id, result) => {
 };
 //BUSCAR TODO
 Lot.getAll = result => {
-    sql.query("SELECT * FROM lot", (err, res) => {
+    sql.query("SELECT l.Lot_Id, p.Name as Product, l.Due_Date, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM lot as l inner join product as p on l.Product_Id = p.Product_Id inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(l.Due_Date) DESC, MONTH(l.Due_Date) DESC, DAY(l.Due_Date) ASC, p.Name ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

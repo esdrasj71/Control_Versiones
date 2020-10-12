@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get("/", (req, res) => {
-  res.json({ message: "<h1> Bienvenidos chavosssss prueba </h1>" });
+  res.json({ message: "<h1> Welcome to the system </h1>" });
 });
 
 //Routes
@@ -35,6 +35,7 @@ require("./routes/payment_purchase.routes")(app);
 require("./routes/payment_detail_purchase.routes")(app);
 require("./routes/payment.routes")(app);
 require("./routes/payment_type_detail.routes")(app);
+require("./routes/procedure_saveproduct.routes")(app);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");

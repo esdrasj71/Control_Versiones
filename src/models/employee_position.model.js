@@ -37,7 +37,7 @@ Employee_Position.findById = (employee_position_id, result) => {
 };
 //BUSCAR TODO
 Employee_Position.getAll = result => {
-    sql.query("SELECT * FROM employee_position", (err, res) => {
+    sql.query("SELECT * FROM employee_position ORDER BY Name ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
