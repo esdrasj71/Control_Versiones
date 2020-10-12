@@ -2,9 +2,9 @@ const sql = require("../conexion.js");
 
 // constructor
 const Product = function (product) {
-  this.Name = product.Name;
-  this.Perishable = product.Perishable;
+  this.Name = product.Name;  
   this.Correlative_Product = product.Correlative_Product;
+  this.Perishable = product.Perishable;
   this.Brand_Id = product.Brand_Id;
   this.Product_Category_Id = product.Product_Category_Id;
 };
@@ -23,26 +23,26 @@ Product.create = (newProduct, result) => {
 };
 
 Product.findById = (productId, result) => {
-  sql.query(`SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, concat(p.Name, ' ' ,b.Name, ' ', pc.Name) as Complete FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id WHERE product_id = ${productId}`, (err, res) => {
+
+sql.query(`SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id  WHERE product_id = ${productId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
-
     if (res.length) {
       console.log("Producto encontrado: ", res[0]);
       result(null, res[0]);
       return;
     }
-
     // not found Product with the id
     result({ kind: "no encontrado" }, null);
   });
 };
 
 Product.getAll = result => {
-  sql.query("SELECT p.Product_Id,p.Correlative_Product, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id", (err, res) => {
+
+sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join lot as l on l.Product_Id = p.Product_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -99,7 +99,7 @@ Product.removeAll = result => {
       console.log("error: ", err);
       result(null, err);
       return;
-    }
+    } master
     console.log(`Productos ${res.affectedRows} eliminados`);
     result(null, res);
   });

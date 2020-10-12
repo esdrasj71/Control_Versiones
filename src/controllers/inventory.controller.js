@@ -13,7 +13,8 @@ exports.create = (req, res) => {
     Unit_Price:req.body.Unit_Price,
     Retail_Price:req.body.Retail_Price,
     Wholesale_Price:req.body.Wholesale_Price,
-    Product_Id: req.body.Product_Id
+    Lot_Id: req.body.Lot_Id,
+    Status: req.body.Status,
   });
 
   // Save product

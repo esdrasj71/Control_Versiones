@@ -42,7 +42,7 @@ Providers.create = (newProviders, result) => {
   };
 
   Providers.getAll = result => {
-    sql.query("SELECT * FROM providers", (err, res) => {
+    sql.query("SELECT * FROM providers ORDER BY Fiscal_Name ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

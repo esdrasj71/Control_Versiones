@@ -37,7 +37,7 @@ Product_Category.findById = (product_categoryId, result) => {
 };
 
 Product_Category.getAll = result => {
-  sql.query("SELECT * FROM product_category", (err, res) => {
+  sql.query("SELECT * FROM product_category ORDER BY Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

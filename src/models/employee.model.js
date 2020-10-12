@@ -46,7 +46,7 @@ Employee.findById = (employeeId, result) => {
 };
 
 Employee.getAll = result => {
-  sql.query("SELECT * FROM Employee", (err, res) => {
+  sql.query("SELECT * FROM Employee ORDER BY Names ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
