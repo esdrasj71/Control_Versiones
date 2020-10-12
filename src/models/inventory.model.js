@@ -43,7 +43,7 @@ sql.query(`SELECT i.Inventory_Id, l.Lot_Id, pp.Correlative_Product as Correlativ
 };
 
 Inventory.getAll = result => {
-  sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, l.Due_Date as DueDate, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Status,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, pp.Name ASC", (err, res) => {
+  sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, l.Due_Date as DueDate, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, pp.Name ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
