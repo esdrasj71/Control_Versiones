@@ -37,7 +37,7 @@ Lot.findById = (lote_id, result) => {
 };
 //BUSCAR TODO
 Lot.getAll = result => {
-    sql.query("SELECT * FROM lot", (err, res) => {
+    sql.query("SELECT * FROM lot ORDER BY Due_Date ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
