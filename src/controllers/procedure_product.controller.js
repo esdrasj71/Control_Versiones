@@ -12,14 +12,8 @@ exports.create = (req, res) => {
         Perishable: req.body.Perishable,
         Brand_Id: req.body.Brand_Id,
         Product_Category_Id: req.body.Product_Category_Id,
-        Stock: req.body.Stock,
-        Unit_Price: req.body.Unit_Price,
-        Retail_Price: req.body.Retail_Price,
-        Wholesale_Price: req.body.Wholesale_Price,
         Statuss: req.body.Statuss,
-        Lot_Id: req.body.Lot_Id,
-        Due_Date: req.body.Due_Date,
-        Product_Id: req.body.Product_Id
+        Due_Date: req.body.Due_Date
     });
 
     procedure_saveproduct.create(Procedure_SaveProduct, (err, data) => {
