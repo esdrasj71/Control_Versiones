@@ -38,7 +38,7 @@ Brand.findById = (brandId, result) => {
 };
 
 Brand.getAll = result => {
-  sql.query("SELECT * FROM brand", (err, res) => {
+  sql.query("SELECT * FROM brand ORDER BY Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

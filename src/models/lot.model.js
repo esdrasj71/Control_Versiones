@@ -37,7 +37,7 @@ Lot.findById = (lote_id, result) => {
 };
 //BUSCAR TODO
 Lot.getAll = result => {
-    sql.query("SELECT l.Lot_Id, p.Name, l.Due_Date FROM lot as l inner join inventory as i on l.Inventory_Id = i.Inventory_Id inner join product as p on p.Product_Id = i.Inventory_Id", (err, res) => {
+    sql.query("SELECT l.Lot_Id, p.Name, l.Due_Date FROM lot as l inner join inventory as i on l.Inventory_Id = i.Inventory_Id inner join product as p on p.Product_Id = i.Inventory_Id ORDER BY Due_Date ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
