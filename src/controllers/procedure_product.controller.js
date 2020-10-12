@@ -16,7 +16,7 @@ exports.create = (req, res) => {
         Unit_Price: req.body.Unit_Price,
         Retail_Price: req.body.Retail_Price,
         Wholesale_Price: req.body.Wholesale_Price,
-        Status: req.body.Status,
+        Statuss: req.body.Statuss,
         Lot_Id: req.body.Lot_Id,
         Due_Date: req.body.Due_Date,
         Product_Id: req.body.Product_Id
