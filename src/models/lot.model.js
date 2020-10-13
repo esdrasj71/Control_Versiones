@@ -72,4 +72,5 @@ Lot.updateById = (id, lot, result) => {
     );
   };
 
+  
 module.exports = Lot;
