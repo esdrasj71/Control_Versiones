@@ -15,24 +15,10 @@ exports.create = (req, res) => {
     Total: req.body.Total,
     Refund:req.body.Refund,
     Annulment_State:req.body.Annulment_State,
+    Payment_Complete:req.body.Payment_Complete,
     Observations:req.body.Observations,
     Providers_Id:req.body.Providers_Id
   });
-  const Procedure_Purchase= new procedure_purchase({
-    Correlative_Number: req.body.Correlative_Number,
-    Serie: req.body.Serie,
-    Date_Purchase: req.body.Date_Purchase,
-    Total: req.body.Total,
-    Refund:req.body.Refund,
-    Annulment_State:req.body.Annulment_State,
-    Observations:req.body.Observations,
-    Providers_Id:req.body.Providers_Id,
-    Quantity: req.body.Quantity,
-    Unit_Price: req.body.Unit_Price,
-    Subtotal: req.body.Subtotal,
-    Inventory_Id:req.body.Inventory_Id
-  })
-
   // Guardar encabezado de compra en la base de datos
   purchase_header.create(Purchase_Header, (err, data) => {
     if (err)
