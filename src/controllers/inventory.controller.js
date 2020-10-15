@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     Retail_Price:req.body.Retail_Price,
     Wholesale_Price:req.body.Wholesale_Price,
     Lot_Id: req.body.Lot_Id,
-    Status: req.body.Status,
+    Statuss: req.body.Statuss,
   });
 
   // Save product

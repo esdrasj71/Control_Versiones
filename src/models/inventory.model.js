@@ -7,7 +7,7 @@ this.Unit_Price = inventory.Unit_Price;
 this.Retail_Price = inventory.Retail_Price;
 this.Wholesale_Price = inventory.Wholesale_Price;
 this.Lot_Id = inventory.Lot_Id;
-this.Status = inventory.Status;
+this.Statuss = inventory.Statuss;
 };
 
 //CRUD
