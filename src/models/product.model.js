@@ -41,7 +41,6 @@ Product.findById = (productId, result) => {
   };
 
 Product.getAll = result => {
-
 sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join lot as l on l.Product_Id = p.Product_Id GROUP BY p.Product_Id, p.Product_Category_Id,p.Brand_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -81,7 +80,6 @@ Product.remove = (id, result) => {
       result(null, err);
       return;
     }
-
     if (res.affectedRows == 0) {
       // not found Product with the id
       result({ kind: "no encontrado" }, null);
