@@ -8,7 +8,7 @@ const Inventory = function(inventory) {
     this.Retail_Price = inventory.Retail_Price;
     this.Wholesale_Price = inventory.Wholesale_Price;
     this.Lot_Id = inventory.Lot_Id;
-    this.Status = inventory.Status;
+    this.Statuss = inventory.Statuss;
 
 };
 
@@ -28,16 +28,12 @@ Inventory.create = (newInventory, result) => {
 Inventory.findById = (Inventario_Id, result) => {
 
 
-    sql.query(`SELECT i.Inventory_Id, l.Lot_Id, pp.Correlative_Product as Correlative_Product, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Status,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join  product as pp on l.Product_Id = pp.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
+    sql.query(`SELECT i.Inventory_Id, l.Lot_Id, pp.Correlative_Product as Correlative_Product, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join  product as pp on l.Product_Id = pp.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
-
-
-
-
         if (res.length) {
             console.log("Inventario encontrado: ", res[0]);
             result(null, res[0]);
@@ -52,7 +48,7 @@ Inventory.findById = (Inventario_Id, result) => {
 Inventory.getAll = result => {
 
 
-    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, l.Due_Date as DueDate, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, pp.Name ASC", (err, res) => {
+    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, l.Due_Date as DueDate, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(DueDate) , MONTH(DueDate) , DAY(DueDate) , pp.Name ", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
