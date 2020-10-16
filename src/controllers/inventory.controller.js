@@ -16,7 +16,6 @@ exports.create = (req, res) => {
         Lot_Id: req.body.Lot_Id,
         Statuss: req.body.Statuss,
     });
-
     // Save product
     Inventory.create(inventory, (err, data) => {
         if (err)

@@ -19,7 +19,7 @@ Lot.create = (newLot, result) => {
 };
     //BUSCAR POR ID
 Lot.findById = (lote_id, result) => {
-    sql.query(`SELECT l.Lot_Id, p.Name as Product, l.Due_Date FROM lot as l inner join product as p on l.Product_Id = p.Product_Id WHERE lot_id = ${lote_id}`, (err,res)=>{
+    sql.query(`SELECT l.Lot_Id,p.Product_Id, p.Name as Product,concat(p.Name,', ',b.Name, ', ',pc.Name) as Complete, p.Correlative_Product, l.Due_Date FROM lot as l inner join product as p on l.Product_Id = p.Product_Id inner join brand as b on b.Brand_Id = p.Product_Id inner join product_category as pc on pc.Product_Category_Id=p.Product_Id WHERE lot_id = ${lote_id}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -72,4 +72,5 @@ Lot.updateById = (id, lot, result) => {
     );
   };
 
+  
 module.exports = Lot;

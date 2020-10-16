@@ -5,5 +5,4 @@ module.exports = app => {
     app.get("/lot", lot.findAll);
     app.get("/lot/:Lot_Id", lot.findOne);
     app.put("/lot/:Lot_Id", lot.update);
-
 };
