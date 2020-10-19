@@ -1,0 +1,45 @@
+const Debs_To_Pay = require("../models/debs_to_pay.model")
+//SAVE
+exports.create = (req, res) => {
+  //Validate the request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Viene Vacio"
+    });
+  }
+  // Create Customer
+  const debs_to_pay = new Debs_To_Pay({
+    Quantity: req.body.Quantity,
+    Total: req.body.Total,
+    Statuss: req.body.Statuss,
+    Date: req.body.Date
+  });
+}
+
+exports.findAllDebs = (req, res) => {
+  Debs_To_Pay.getAllDebs((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Ha ocurrido un error!"
+      });
+    else res.send(data);
+  });
+};
+
+exports.findOneDebs = (req, res) => {
+  Debs_To_Pay.findByIdDebs(req.params.debstopayId, (err, data) => {
+    if (err) {
+      if (err.kind === "No se pudo encontrar el Proveedor") {
+        res.status(404).send({
+          message: `Proveedor con ID no encontrado: ${req.params.debstopayId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Cliente con ID no encontrado: " + req.params.debstopayId
+        });
+      }
+    } else res.send(data);
+  });
+};
+
