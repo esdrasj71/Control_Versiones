@@ -43,3 +43,18 @@ exports.findOneDebs = (req, res) => {
   });
 };
 
+exports.findOnePurchase = (req, res) => {
+  Debs_To_Pay.findByIdPurchase(req.params.purchaseheaderId, (err, data) => {
+    if (err) {
+      if (err.kind === "No se pudo encontrar la Compra") {
+        res.status(404).send({
+          message: `Encabezado de compra con ID no encontrado: ${req.params.purchaseheaderId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Encabezado de compra con ID no encontrado: " + req.params.purchaseheaderId
+        });
+      }
+    } else res.send(data);
+  });
+};
