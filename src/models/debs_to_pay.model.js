@@ -33,7 +33,7 @@ Debs_To_Pay.findByIdDebs = (providersId, result) => {
 };
 
 Debs_To_Pay.getAllDebs = result => {
-  sql.query("SELECT p.Fiscal_Name ,ph.Purchase_Header_Id, ph.Correlative_Number ,ph.Payment_Complete, pp.Method_Name,  SUM(pdp.Total_Amount) as Pagar FROM purchase_header as ph  inner join payment_detail_purchase as pdp on ph.Purchase_Header_Id = pdp.Purchase_Header_Id  inner join payment_purchase as pp on pdp.Payment_Purchase_Id = pp.Payment_Purchase_Id inner join providers as p on ph.Providers_Id = p.Providers_Id Where pp.Method_Name like '%credito%' and ph.Payment_Complete = 1 group by p.Fiscal_Name", (err, res) => {
+  sql.query("SELECT p.Fiscal_Name, p.NIT, p.Phone_Number1, ph.Purchase_Header_Id,ph.Payment_Complete, pp.Method_Name, SUM(pdp.Total_Amount) as Pay FROM purchase_header as ph inner join payment_detail_purchase as pdp on ph.Purchase_Header_Id = pdp.Purchase_Header_Id inner join payment_purchase as pp on pdp.Payment_Purchase_Id = pp.Payment_Purchase_Id inner join providers as p on ph.Providers_Id = p.Providers_Id Where pp.Method_Name like '%credito%' and ph.Payment_Complete = 1 group by p.Fiscal_Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
