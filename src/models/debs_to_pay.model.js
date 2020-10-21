@@ -8,6 +8,19 @@ const Debs_To_Pay = function(debs_to_pay) {
   this.Date = debs_to_pay.Date;
   this.Purchase_Header_Id = debs_to_pay.Purchase_Header_Id;
 };
+
+Debs_To_Pay.create = (newDebstoPay, result) => {
+  sql.query("INSERT INTO Debs_to_pay SET ?", newDebstoPay, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    console.log("Cuenta por pagar creada: ", { id: res.insertId, ...newDebstoPay });
+    result(null, { id: res.insertId, ...newDebstoPay });
+  });
+};
+
 Debs_To_Pay.findByIdDebs = (providersId, result) => {
   sql.query(`SELECT a.Debs_to_Pay_Id, b.Purchase_Header_Id, p.Providers_Id, p.Fiscal_Name, b.Correlative_Number, b.Serie, b.Date_Purchase, a.Total
   as Pay FROM debs_to_pay as a inner join purchase_header as b on a.Purchase_Header_Id = b.Purchase_header_Id 

@@ -12,9 +12,19 @@ exports.create = (req, res) => {
     Quantity: req.body.Quantity,
     Total: req.body.Total,
     Statuss: req.body.Statuss,
-    Date: req.body.Date
+    Date: req.body.Date,
+    Purchase_Header_Id: req.body.Purchase_Header_Id,
   });
-}
+   // Save debs to pay
+   Debs_To_Pay.create(debs_to_pay, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Ha ocurrido un error!"
+      });
+    else res.send(data);
+  });
+};
 
 exports.findAllDebs = (req, res) => {
   Debs_To_Pay.getAllDebs((err, data) => {
