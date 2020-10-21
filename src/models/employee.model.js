@@ -46,7 +46,7 @@ Employee.findById = (employeeId, result) => {
 };
 
 Employee.getAll = result => {
-  sql.query("SELECT * FROM Employee ORDER BY Names ASC", (err, res) => {
+  sql.query("SELECT *, p.Name as Posicion, CASE e.Gender WHEN 1 then 'Masculino' WHEN 0 then 'Femenino' END as SEXO FROM Employee as e INNER JOIN employee_position as p ON p.Employee_Position_Id = e.Employee_Position_Id ORDER BY e.Names ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

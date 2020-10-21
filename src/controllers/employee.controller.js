@@ -16,7 +16,8 @@ exports.create = (req, res) => {
     Cellphone_number: req.body.Cellphone_number,
     Email: req.body.Email,
     Gender: req.body.Gender,
-    Hire_date: req.body.Hire_date
+    Hire_date: req.body.Hire_date,
+    Employee_Position_Id: req.body.Employee_Position_Id
   });
 
   // Save Employee
