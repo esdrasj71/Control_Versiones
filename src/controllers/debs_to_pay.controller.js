@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     Quantity: req.body.Quantity,
     Total: req.body.Total,
     Statuss: req.body.Statuss,
-    Date: req.body.Date,
+    Description: req.body.Description,
     Purchase_Header_Id: req.body.Purchase_Header_Id,
   });
    // Save debs to pay

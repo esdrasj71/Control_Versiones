@@ -9,6 +9,7 @@ exports.create = (req, res) => {
     const Procedure_SaveDebs = new procedure_savedebs({
         Providers_Id: req.body.Providers_Id,
         Quantity: req.body.Quantity,
+        Description: req.body.Description,
     });
 
     procedure_savedebs.create(Procedure_SaveDebs, (err, data) => {

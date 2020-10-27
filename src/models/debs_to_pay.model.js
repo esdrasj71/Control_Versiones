@@ -5,7 +5,7 @@ const Debs_To_Pay = function(debs_to_pay) {
   this.Quantity = debs_to_pay.Quantity;
   this.Total = debs_to_pay.Total;
   this.Statuss = debs_to_pay.Statuss;
-  this.Date = debs_to_pay.Date;
+  this.Description = debs_to_pay.Description;
   this.Purchase_Header_Id = debs_to_pay.Purchase_Header_Id;
 };
 
