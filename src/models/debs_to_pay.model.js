@@ -55,14 +55,14 @@ Debs_To_Pay.getAllDebs = result => {
 };
 
 Debs_To_Pay.findByIdPurchase = (purchaseheaderId, result) => {
-  sql.query(`SELECT a.Purchase_Header_Id, a.Correlative_Number, concat(e.Name,', ', f.Name, ', ',g.Name) as ProductComplete ,c.Lot_Id, b.Quantity, b.Unit_Price, b.SubTotal 
-  from purchase_header as a inner join purchase_detail as b on a.Purchase_Header_Id = b.Purchase_Header_Id
-  inner join inventory as c on c.Inventory_Id = b.Inventory_Id
-  inner join lot as d on d.Lot_Id = c.Lot_Id
-  inner join product as e on e.Product_Id = d.Product_Id
-  inner join brand as f on e.Brand_Id = f.Brand_Id
-  inner join product_category as g on e.Product_Category_Id = g.Product_Category_Id 
-  where a.Purchase_Header_Id = ${purchaseheaderId}`, (err, res) => {
+  sql.query(`SELECT a.Purchase_Header_Id, a.Correlative_Number, concat(e.Name,', ', f.Name, ', ',g.Name) as ProductComplete ,c.Lot_Id, b.Quantity, b.Unit_Price, b.SubTotal
+    from purchase_header as a inner join purchase_detail as b on a.Purchase_Header_Id = b.Purchase_Header_Id
+    inner join inventory as c on c.Inventory_Id = b.Inventory_Id
+    inner join lot as d on d.Lot_Id = c.Lot_Id
+    inner join product as e on e.Product_Id = d.Product_Id
+    inner join brand as f on e.Brand_Id = f.Brand_Id
+    inner join product_category as g on e.Product_Category_Id = g.Product_Category_Id 
+    where a.Purchase_Header_Id = ${purchaseheaderId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
