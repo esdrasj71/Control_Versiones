@@ -1,18 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const conectar = require('./conexion');
-const app = express();  
+const app = express();
 const cors = require("cors");
 
 // para que la consola nos reconozca peticiones json
 app.use(bodyParser.json());
-app.use(cors({origin: '*'}));
+app.use(cors({ origin: '*' }));
 // analizar solicitudes de tipo: application / x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get("/", (req, res) => {
-  res.json({ message: "<h1> Welcome to the system </h1>" });
+    res.json({ message: "<h1> Welcome to the system </h1>" });
 });
 
 //Routes
@@ -28,7 +28,7 @@ require("./routes/customers.routes")(app);
 require("./routes/employee.routes")(app);
 require("./routes/employee_position.routes")(app);
 require("./routes/bill_header.routes")(app);
-require("./routes/bill_detail.routes")(app); 
+require("./routes/bill_detail.routes")(app);
 require("./routes/procedure_purchase.routes")(app);
 require("./routes/procedure_sale.routes")(app);
 require("./routes/payment_purchase.routes")(app);
@@ -37,7 +37,8 @@ require("./routes/payment.routes")(app);
 require("./routes/payment_type_detail.routes")(app);
 require("./routes/procedure_saveproduct.routes")(app);
 require("./routes/procedure_lot.routes")(app);
-
+require("./routes/accounts.receivable.routes")(app);
+require("./routes/procedure_cuentas_cobrar.routes")(app);
 app.listen(3000, () => {
-  console.log("Server is running on port 3000.");
+    console.log("Server is running on port 3000.");
 });
