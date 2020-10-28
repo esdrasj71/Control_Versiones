@@ -14,6 +14,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 
 app.use("", require("./routes/login.routes"));
+
 rutasProtegidas.use((req, res, next) => {
   const token = req.headers['accesstoken'];
   if(token==0)
