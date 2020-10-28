@@ -1,11 +1,8 @@
-module.exports = app => {
-    const employee = require("../controllers/employee.controller.js");
-
-      //Employee
-      app.post("/employee", employee.create);
-      app.get("/employee", employee.findAll);
-      app.get("/employee/:employeeId", employee.findOne);
-      app.put("/employee/:employeeId", employee.update);
-      app.delete("/employee/:employeeId", employee.delete);
-      
-};
+const router=require('express').Router();
+const employee = require("../controllers/employee.controller.js");
+      router.post("/employee", employee.create);
+      router.get("/employee", employee.findAll);
+      router.get("/employee/:employeeId", employee.findOne);
+      router.put("/employee/:employeeId", employee.update);
+      router.delete("/employee/:employeeId", employee.delete);
+module.exports=router;

@@ -1,4 +1,5 @@
-const Employee = require("../models/employee.model.js")
+const Employee = require("../models/employee.model.js");
+const Employee_Position = require("../models/employee_position.model.js");
 //SAVE
 exports.create = (req, res) => {
   //Validate the request

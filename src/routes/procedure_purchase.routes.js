@@ -1,6 +1,6 @@
-module.exports = app => {
+const router=require('express').Router();
     const purchase = require("../controllers/procedure_purchase.controller.js");
 
       //Brands
-      app.post("/procedure_purchase", purchase.create);
-};
+      router.post("/procedure_purchase", purchase.create);
+module.exports=router;

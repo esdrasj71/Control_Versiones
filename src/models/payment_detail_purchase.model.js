@@ -54,8 +54,8 @@ Payment_Detail_Purchase.findById = (PaymentDetailId, result) => {
 
 Payment_Detail_Purchase.updateById = (id, paymentDetail, result) => {
   sql.query(
-    "UPDATE payment_detail_purchase SET Total_Amount = ?, Description = ?, Purchase_Header_Id = ?, Method_Name = ? WHERE Payment_Detail_Purchase_Id = ?",
-    [paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Method_Name ,paymentDetail.Purchase_Header_Id, id],
+"UPDATE payment_detail_purchase SET Method_Name=?,Total_Amount = ?, Description = ?, Purchase_Header_Id = ? WHERE Payment_Detail_Purchase_Id = ?",
+[paymentDetail.Method_Name,paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Purchase_Header_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
