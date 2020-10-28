@@ -1,42 +1,72 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const conectar = require('./conexion');
-const app = express();  
+const app = express();
 const cors = require("cors");
+const rutasProtegidas = express.Router();
+jwt = require("jsonwebtoken");
+  // para que la consola nos reconozca peticiones json
 
-// para que la consola nos reconozca peticiones json
-app.use(bodyParser.json());
-app.use(cors({origin: '*'}));
-// analizar solicitudes de tipo: application / x-www-form-urlencoded
+  // analizar solicitudes de tipo: application / x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors({ origin: true, credentials: true }));
 
 
-app.get("/", (req, res) => {
-  res.json({ message: "<h1> Welcome to the system </h1>" });
+app.use("", require("./routes/login.routes"));
+let count=0;
+rutasProtegidas.use((req, res, next) => {
+  const token = req.headers['accesstoken'];
+
+  if(token==0)
+  {
+    console.log('si entro');
+       jwt.verify(0, "secretpass", (err, decoded) => {
+        req.decoded = decoded;
+        next();
+      });
+
+  }else{
+    if (token) {
+      jwt.verify(token, "secretpass", (err, decoded) => {
+        if (err) {
+          return res.json({ mensaje: "Token inválida" ,error:err});
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
+    } else {
+      res.send({
+        mensaje: "Token no proveída.",
+      });
+    }
+  }
 });
 
 //Routes
-require("./routes/providers.routes")(app);
-require("./routes/brand.routes")(app);
-require("./routes/product_category.routes")(app);
-require("./routes/product.routes")(app);
-require("./routes/lot.routes")(app);
-require("./routes/inventory.routes")(app);
-require("./routes/purchase_header.routes")(app);
-require("./routes/purchase_detail.routes")(app);
-require("./routes/customers.routes")(app);
-require("./routes/employee.routes")(app);
-require("./routes/employee_position.routes")(app);
-require("./routes/bill_header.routes")(app);
-require("./routes/bill_detail.routes")(app); 
-require("./routes/procedure_purchase.routes")(app);
-require("./routes/procedure_sale.routes")(app);
-require("./routes/payment_purchase.routes")(app);
-require("./routes/payment_detail_purchase.routes")(app);
-require("./routes/payment.routes")(app);
-require("./routes/payment_type_detail.routes")(app);
-require("./routes/procedure_saveproduct.routes")(app);
-require("./routes/procedure_lot.routes")(app);
+app.use("",require("./routes/user.routes"));
+app.use("",rutasProtegidas, require("./routes/providers.routes"));
+app.use("", rutasProtegidas, require("./routes/product.routes"));
+app.use("", rutasProtegidas,require("./routes/brand.routes"));
+app.use("", rutasProtegidas,require("./routes/product_category.routes"));
+app.use("", rutasProtegidas,require("./routes/lot.routes"));
+app.use("", rutasProtegidas,require("./routes/inventory.routes"));
+app.use("", rutasProtegidas,require("./routes/purchase_header.routes"));
+app.use("", rutasProtegidas,require("./routes/purchase_detail.routes"));
+app.use("", rutasProtegidas,require("./routes/customers.routes"));
+app.use("", rutasProtegidas,require("./routes/employee.routes"));
+app.use("", rutasProtegidas,require("./routes/employee_position.routes"));
+app.use("", rutasProtegidas,require("./routes/bill_header.routes"));
+app.use("", rutasProtegidas,require("./routes/bill_detail.routes")); 
+app.use("", rutasProtegidas,require("./routes/procedure_purchase.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_sale.routes"));
+app.use("", rutasProtegidas,require("./routes/payment_purchase.routes"));
+app.use("", rutasProtegidas,require("./routes/payment_detail_purchase.routes"));
+app.use("", rutasProtegidas,require("./routes/payment.routes"));
+app.use("", rutasProtegidas,require("./routes/payment_type_detail.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_saveproduct.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_lot.routes"));
+
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");

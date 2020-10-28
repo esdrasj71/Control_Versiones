@@ -2,9 +2,9 @@ const sql = require("../conexion.js");
 
 // constructor
 const Payment_Detail_Purchase = function(payment_detail_purchase) {
+  this.Method_Name = payment_detail_purchase.Method_Name;
   this.Total_Amount = payment_detail_purchase.Total_Amount;
   this.Description = payment_detail_purchase.Description;
-  this.Payment_Purchase_Id = payment_detail_purchase.Payment_Purchase_Id;
   this.Purchase_Header_Id = payment_detail_purchase.Purchase_Header_Id;
 };
 
@@ -54,8 +54,8 @@ Payment_Detail_Purchase.findById = (PaymentDetailId, result) => {
 
 Payment_Detail_Purchase.updateById = (id, paymentDetail, result) => {
   sql.query(
-    "UPDATE payment_detail_purchase SET Total_Amount = ?, Description = ?, Payment_Purchase_Id = ?, Purchase_Header_Id = ? WHERE Payment_Detail_Purchase_Id = ?",
-    [paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Payment_Purchase_Id, paymentDetail.Purchase_Header_Id, id],
+    "UPDATE payment_detail_purchase SET Method_Name=?,Total_Amount = ?, Description = ?, Purchase_Header_Id = ? WHERE Payment_Detail_Purchase_Id = ?",
+    [paymentDetail.Method_Name,paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Purchase_Header_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

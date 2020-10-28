@@ -1,11 +1,14 @@
-module.exports = app => {
+const { Router } = require("express");
+
+
+const router=require('express').Router();
+
     const providers = require("../controllers/providers.controller.js");
 
     //Providers
-    app.post("/providers", providers.create);
-    app.get("/providers", providers.findAll);
-    app.get("/providers/:providersId", providers.findOne);
-    app.put("/providers/:providersId", providers.update);
-    app.delete("/providers/:providersId", providers.delete);
-
-};
+    router.post("/providers", providers.create);
+    router.get("/providers", providers.findAll);
+    router.get("/providers/:providersId", providers.findOne);
+    router.put("/providers/:providersId", providers.update);
+    router.delete("/providers/:providersId", providers.delete);
+module.exports=router;

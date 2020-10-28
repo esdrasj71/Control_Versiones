@@ -1,5 +1,5 @@
-module.exports = app => {
+const router=require('express').Router();
     const saveproduct = require("../controllers/procedure_product.controller");
     //Product
-    app.post("/procedure_product", saveproduct.create);
-};
+    router.post("/procedure_product", saveproduct.create);
+module.exports=router;

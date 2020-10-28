@@ -8,9 +8,9 @@ exports.create = (req, res) => {
     });
   }
   const payment_detail_purchase = new Payment_Detail_Purchase({ 
+    Method_Name : req.body.Method_Name,
     Total_Amount: req.body.Total_Amount,
     Description: req.body.Description,
-    Payment_Purchase_Id: req.body.Payment_Purchase_Id,
     Purchase_Header_Id: req.body.Purchase_Header_Id
   });
 
