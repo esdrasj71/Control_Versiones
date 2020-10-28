@@ -23,7 +23,7 @@ Debs_To_Pay.create = (newDebstoPay, result) => {
 
 Debs_To_Pay.findByIdDebs = (providersId, result) => {
   sql.query(`SELECT a.Debs_to_Pay_Id, b.Purchase_Header_Id, p.Providers_Id, p.Fiscal_Name, b.Correlative_Number, b.Serie, b.Date_Purchase, a.Total- a.Quantity
-  as Pay FROM debs_to_pay as a inner join purchase_header as b on a.Purchase_Header_Id = b.Purchase_header_Id 
+  as Pay, b.Total FROM debs_to_pay as a inner join purchase_header as b on a.Purchase_Header_Id = b.Purchase_header_Id 
   inner join providers as p on b.Providers_Id = p.Providers_Id 
   where a.Statuss = 1 and p.Providers_Id =  ${providersId}`, (err, res) => {
     if (err) {
