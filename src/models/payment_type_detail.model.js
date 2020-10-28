@@ -40,7 +40,7 @@ Payment_Type_Detail.findById = (PaymentDetailId, result) => {
 };
 
 Payment_Type_Detail.getAll = result => {
-    sql.query("SELECT * FROM payment_type_detail", (err, res) => {
+    sql.query("SELECT *, p.Method_Name as Method FROM payment_type_detail as e INNER JOIN payment as p ON p.Payment_Id = e.Payment_Id", (err, res) => { 
         if (err) {
             console.log("error: ", err);
             result(null, err);
