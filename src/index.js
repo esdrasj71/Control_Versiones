@@ -66,6 +66,7 @@ app.use("", rutasProtegidas,require("./routes/payment.routes"));
 app.use("", rutasProtegidas,require("./routes/payment_type_detail.routes"));
 app.use("", rutasProtegidas,require("./routes/procedure_saveproduct.routes"));
 app.use("", rutasProtegidas,require("./routes/procedure_lot.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_debs.routes"));
 
 
 app.listen(3000, () => {

@@ -1,5 +1,5 @@
-module.exports = app => {
-    const savedebs = require("../controllers/procedure_debstopay.controller");
+const router = require('express').Router();
+const savedebs = require("../controllers/procedure_debstopay.controller");
     //Debs to pay
-    app.post("/procedure_debs", savedebs.create);
-};
+    router.post("/procedure_debs", savedebs.create);
+module.exports = router;
