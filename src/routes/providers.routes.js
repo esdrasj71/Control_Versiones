@@ -7,5 +7,5 @@ module.exports = app => {
     app.get("/providers/:providersId", providers.findOne);
     app.put("/providers/:providersId", providers.update);
     app.delete("/providers/:providersId", providers.delete);
-
+    
 };

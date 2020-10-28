@@ -99,3 +99,4 @@ exports.findAll = (req, res) => {
       } else res.send({ message: `Provider has been successfully removed!` });
     });
   };
+
