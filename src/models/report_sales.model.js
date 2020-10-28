@@ -18,23 +18,16 @@ Report_Sales.getReport3 = result => {
 }
 Report_Sales.getReport2 = (newReport, result) => {
     console.log(newReport);
-    sql.query(`SELECT CONCAT(c.Names," " ,c.Last_names) as Names, c.DPI, c.NIT, c.Phone_Number, c.Address ,COUNT(*) AS NoVentas, 
-    SUM(bh.Total) as Total from bill_header as bh INNER JOIN customers as c on c.Customers_Id = bh.Customers_Id  WHERE bh.Date BETWEEN 
-    (?) AND (?) GROUP BY C.Customers_Id  
-    ORDER BY Total  DESC;`, (err, res) => {
+    sql.query("CALL reporte2(?,?);",
+    [newReport.fechainicio, newReport.fechafin], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
-
-        if (res.length) {
-            console.log("Reporte 2 encontrado: ", res);
-            result(null, res);
-            return;
-        }
-
-        result({ kind: "Reporte 2 no encontrado" }, null);
+        console.log("Reporte 2 correctamente: ", { ...newReport });
+        result(null, { ...newReport });
+       
     });
 };
 module.exports = Report_Sales;
