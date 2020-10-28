@@ -33,7 +33,7 @@ exports.create = (req, res) => {
       login.Username = data.Username;
       login.Password = data.Password;
       login.Token = jwt.sign({ id }, "secretpass", {
-        expiresIn: '900s',
+        expiresIn: '1d',
       });
       //console.log("El token es: " + login.Token);
       //const cookieOptions = {
