@@ -46,7 +46,7 @@ exports.findOneDebs = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Cliente con ID no encontrado: " + req.params.debstopayId
+          message: "Proveedor con ID no encontrado: " + req.params.debstopayId
         });
       }
     } else res.send(data);
