@@ -37,4 +37,3 @@ exports.detailreport1 = (req, res) => {
       } else res.send(data);
     });
   };
-  
