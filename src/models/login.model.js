@@ -6,6 +6,8 @@ const Login = function (log) {
   this.Username = log.Username;
   this.Password = log.Password;
   this.Token = log.Token;
+  this.Usertype=log.Usertype;
+  this.Employee_Id=log.Employee_Id;
 };
 
 Login.create = async (newLog, result) => {
