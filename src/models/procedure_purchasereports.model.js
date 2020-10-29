@@ -20,13 +20,9 @@ Procedure_PurchaseReport1.create = (newPurchaseReport1, result) => {
 
 };
 
-//Detalle Reporte 1
-Procedure_PurchaseReport1.detail = (providersId, result) => {
-  sql.query(`Select a.Purchase_Header_Id, b.Providers_Id, b.Fiscal_Name, b.NIT, a.Correlative_Number, a.Date_Purchase, a.Total
-	from purchase_header as a 
-	inner join providers as b on a.Providers_Id = b.Providers_Id 
-	where b.Providers_Id = ${providersId}   
-	order by a.Date_Purchase desc`, (err, res) => {
+//Detalle Reporte 2
+Procedure_PurchaseReport1.detaildebs = (result) => {
+  sql.query('SELECT a.Debs_to_Pay_Id,p.Providers_Id, b.Purchase_Header_Id,p.Fiscal_Name, p.NIT, p.Phone_Number1, SUM(a.Total - a.Quantity) as Pay, COUNT(*) as Debs FROM debs_to_pay as a inner join purchase_header as b on a.Purchase_Header_Id = b.Purchase_header_Id inner join providers as p on b.Providers_Id = p.Providers_Id where a.Statuss = 1 group by p.Fiscal_Name', (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -34,7 +30,7 @@ Procedure_PurchaseReport1.detail = (providersId, result) => {
     }
 
     if (res.length) {
-      console.log("Proveedor encontrado: ", res);
+      console.log("Cuenta por pagar encontrada: ", res);
       result(null, res);
       return;
     }
@@ -42,4 +38,5 @@ Procedure_PurchaseReport1.detail = (providersId, result) => {
     result({ kind: "no encontrado" }, null);
   });
 };
+
 module.exports = Procedure_PurchaseReport1;

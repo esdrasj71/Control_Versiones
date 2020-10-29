@@ -70,6 +70,11 @@ app.use("", rutasProtegidas,require("./routes/procedure_lot.routes"));
 app.use("", rutasProtegidas,require("./routes/debs_to_pay.routes"));
 app.use("", rutasProtegidas,require("./routes/procedure_debs.routes"));
 app.use("", rutasProtegidas,require("./routes/procedure_purchasereport1.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_purchasereport2.routes"));
+
+
+
+
 
 
 
