@@ -14,8 +14,8 @@ sql.query("CALL PurchaseReport1(?,?);",
         result(null, err);
         return;
       }
-      console.log("Purchase: ", res);
-      result(null, res);
+      console.log("Purchase: ",  { ...res });
+      result(null,  { ...res});
     });
 
 };
