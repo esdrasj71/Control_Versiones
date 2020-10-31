@@ -24,11 +24,7 @@ exports.create = (req, res) => {
         message: err.message,
       });
     } else {
-      if (!data) {
-        res.json({
-          mensaje: "Autenticación Incorrecta",
-        });
-      } else {
+
         console.log(data);
         const id = data.User_Id;
         login.Username = data.Username;
@@ -45,14 +41,14 @@ exports.create = (req, res) => {
         //  secure: true,
         // };
         res.json({
-          mensaje: "Autenticación correcta",
+          message:data.message,
           Token: login.Token,
           User_Id: data.User_Id,
           Username: login.Username,
           Usertype: login.Usertype,
           Employee_Id: login.Employee_Id
         });
-      }
+      
     }
   });
 };
