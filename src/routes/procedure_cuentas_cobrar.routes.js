@@ -1,5 +1,5 @@
-module.exports = app => {
-    const cuenta_cobrar = require("../controllers/procedure_cuentas_cobrar.controller");
+const router=require('express').Router();
+const cuenta_cobrar = require("../controllers/procedure_cuentas_cobrar.controller");
 
-    app.post("/procedure_cuentas_cobrar", cuenta_cobrar.create);
-};
+    router.post("/procedure_cuentas_cobrar", cuenta_cobrar.create);
+module.exports=router;
