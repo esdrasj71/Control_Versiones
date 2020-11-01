@@ -36,6 +36,17 @@ exports.findAll = (req, res) => {
         else res.send(data);
     });
 };
+// NO PERECEDERO
+exports.findNoPerishable = (req, res) => {
+    //Get all supplier data
+    Inventory.getNotPerishable((err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Ha ocurrido un error!"
+            });
+        else res.send(data);
+    });
+};
 //GET ONE
 exports.findOne = (req, res) => {
     //We obtain the product with its id

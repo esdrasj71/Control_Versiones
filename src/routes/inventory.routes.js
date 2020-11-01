@@ -6,4 +6,5 @@ const inventory = require("../controllers/inventory.controller.js");
     router.get("/inventory/:Inventory_Id", inventory.findOne);
     router.put("/inventory/:Inventory_Id", inventory.update);
     router.delete("/inventory/:Inventory_Id", inventory.delete);
+    router.get("/inventoryNoPerishable",inventory.findNoPerishable);
 module.exports=router;
