@@ -6,6 +6,8 @@ const Login = function (log) {
   this.Username = log.Username;
   this.Password = log.Password;
   this.Token = log.Token;
+  this.Usertype=log.Usertype;
+  this.Employee_Id=log.Employee_Id;
 };
 
 Login.create = async (newLog, result) => {
@@ -19,15 +21,15 @@ Login.create = async (newLog, result) => {
       async (err, res) => {
         //console.log(res.length);
         if(res.length==0){
-          return result({ message: "Porfavor introduzca su usuario y contraseña" });
-          }
+          return result(null,{ message: "El usuario o contraseña son incorrectos" });
+         }
         if (!res || !(await bcrypt.compare(newLog.Password, res[0].Password))) {
           return result(null, {
             message: "El usuario o contraseña son incorrectos",
           });
         }
         else {
-          result(null, res[0]);
+          result(null,res[0]);
         }
       },(error)=>{
          result(error,error);  

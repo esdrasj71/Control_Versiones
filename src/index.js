@@ -15,6 +15,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.use("", require("./routes/login.routes"));
 
+
 rutasProtegidas.use((req, res, next) => {
   const token = req.headers['accesstoken'];
   if(token==0)
@@ -69,6 +70,13 @@ app.use("", rutasProtegidas,require("./routes/procedure_lot.routes"));
 app.use("", rutasProtegidas,require("./routes/accounts.receivable.routes"));
 app.use("", rutasProtegidas,require("./routes/procedure_cuentas_cobrar.routes"));
 app.use("", rutasProtegidas,require("./routes/report_sales.routes"));
+app.use("", rutasProtegidas,require("./routes/debs_to_pay.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_debs.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_purchasereport1.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_purchasereport2.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_inventoryreport1.routes"));
+app.use("", rutasProtegidas,require("./routes/procedure_inventoryreport2.routes"));
+
 
 
 app.listen(3000, () => {
