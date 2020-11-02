@@ -54,8 +54,8 @@ Inventory.getAll = result => {
     });
 };
 // MUESTRA NO PERECEDEROS
-Inventory.getGroup = result => {
-    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id where pp.Perishable=0", (err, res) => {
+Inventory.getNotPerishable = result => {
+    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product, pp.Name as Product, b.Name as Brand, pc.Name as Category, SUM(i.Stock) as Stock, ROUND(SUM(i.Stock *i.Unit_Price)/SUM(i.Stock),2) as Precio FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id Group by pp.Product_Id", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -65,9 +65,10 @@ Inventory.getGroup = result => {
         result(null, res);
     });
 };
+
 //Inventory Group
-Inventory.getNotPerishable = result => {
-    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product, pp.Name as Product, b.Name as Brand, pc.Name as Category, SUM(i.Stock) as Stock, ROUND(AVG(pd.Unit_Price),2) as Precio FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id  inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id inner join purchase_detail as pd on pd.Inventory_Id = i.Inventory_Id inner join purchase_header as ph on ph.Purchase_Header_Id = pd.Purchase_Header_Id Group by pp.Product_Id;", (err, res) => {
+Inventory.getGroup = result => {
+    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, i.Stock, i.Unit_Price, i.Retail_Price, i.Wholesale_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id where pp.Perishable=0", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
