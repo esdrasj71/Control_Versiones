@@ -47,6 +47,17 @@ exports.findNoPerishable = (req, res) => {
         else res.send(data);
     });
 };
+// Agrupado
+exports.findGroup = (req, res) => {
+    //Get all supplier data
+    Inventory.getGroup((err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Ha ocurrido un error!"
+            });
+        else res.send(data);
+    });
+};
 //GET ONE
 exports.findOne = (req, res) => {
     //We obtain the product with its id
