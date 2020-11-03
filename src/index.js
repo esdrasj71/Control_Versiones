@@ -45,7 +45,7 @@ rutasProtegidas.use((req, res, next) => {
 });
 
 //Routes
-app.use("",rutasProtegidas,require("./routes/user.routes"));
+app.use("",require("./routes/user.routes"));
 app.use("",rutasProtegidas, require("./routes/providers.routes"));
 app.use("", rutasProtegidas, require("./routes/product.routes"));
 app.use("", rutasProtegidas,require("./routes/brand.routes"));
