@@ -76,8 +76,11 @@ app.use("", rutasProtegidas,require("./routes/procedure_purchasereport1.routes")
 app.use("", rutasProtegidas,require("./routes/procedure_purchasereport2.routes"));
 app.use("", rutasProtegidas,require("./routes/procedure_inventoryreport1.routes"));
 app.use("", rutasProtegidas,require("./routes/procedure_inventoryreport2.routes"));
+app.use("", rutasProtegidas,require("./routes/bank.routes"));
+app.use("", rutasProtegidas,require("./routes/bill_type.routes"));
+app.use("", rutasProtegidas,require("./routes/costs.routes"));
+app.use("", rutasProtegidas,require("./routes/expenses.routes"));
 app.use("",rutasProtegidas,require("./routes/company.routes"));
-
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
