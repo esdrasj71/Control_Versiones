@@ -57,7 +57,7 @@ Expenditures.findById = (expendituresId, result) => {
 };
 
 Expenditures.getAll = result => {
-    sql.query("SELECT a.Expenditures_Id, b.Expenses_Id, c.Cost_Id, d.Bill_Type_Id, e.Bank_Id, f.Providers_Id, a.Date, a.Amount, d.Name as Bill, a.No_Bill, a.Cheque, a.No_Cheque, b.Name as Expense, c.Name as Cost, e.Bank_Name as Bank, f.Fiscal_Name as FiscalName, CASE a.Cheque WHEN 1 THEN 'Cheque' WHEN 0 THEN 'Transferencia' END AS Cheques FROM expenditures as a inner join Expenses as b on b.Expenses_Id = a.Expenses_Id inner join Costs as c on c.Cost_Id = a.Cost_Id inner join Bill_Type as d on d.Bill_Type_Id = a.Bill_Type_Id inner join Bank as e on e.Bank_Id = a.Bank_Id inner join providers as f on f.Providers_Id = a.Providers_Id ORDER BY Date desc", (err, res) => {
+    sql.query("SELECT a.Expenditures_Id, b.Expenses_Id, d.Bill_Type_Id, e.Bank_Id, f.Providers_Id, a.Date, a.Amount, d.Name as Bill, a.No_Bill,a.Cheque, a.No_Cheque, b.Name as Expense, e.Bank_Name as Bank, f.Fiscal_Name as FiscalName, CASE a.Cheque WHEN 1 THEN 'Cheque' WHEN 0 THEN 'Transferencia' END AS Cheques FROM expenditures as a inner join Expenses as b on b.Expenses_Id = a.Expenses_Id  inner join Bill_Type as d on d.Bill_Type_Id = a.Bill_Type_Id inner join Bank as e on e.Bank_Id = a.Bank_Id inner join providers as f on f.Providers_Id = a.Providers_Id where a.Cost_Id is null or a.Expenses_Id is null ORDER BY a.Date desc", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
