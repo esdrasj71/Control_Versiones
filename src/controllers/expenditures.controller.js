@@ -89,15 +89,15 @@ exports.update = (req, res) => {
 };
 //DELETE
 exports.delete = (req, res) => {
-    Expenditures.remove(req.params.expendituresId, (err, data) => {
+    Expenditures.remove(req.params.Expenditures_Id, (err, data) => {
         if (err) {
             if (err.kind === "El egreso a eliminar no ha sido encontrado") {
                 res.status(404).send({
-                    message: `Egreso con ID no encontrado ${req.params.expendituresId}.`
+                    message: `Egreso con ID no encontrado ${req.params.Expenditures_Id}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "No se puede eliminar egreso con ID " + req.params.expendituresId
+                    message: "No se puede eliminar egreso con ID " + req.params.Expenditures_Id
                 });
             }
         } else res.send({ message: `Egreso eliminado exitosamente` });
