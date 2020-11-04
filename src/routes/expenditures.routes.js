@@ -4,5 +4,5 @@ const expenditures = require("../controllers/expenditures.controller.js");
       router.get("/expenditures", expenditures.findAll);
       router.get("/expenditures/:expendituresId", expenditures.findOne);
       router.put("/expenditures/:expendituresId", expenditures.update);
-      router.delete("/expenditures/:expendituresId", expenditures.delete);
+      router.delete("/expendituresdelete/:Expenditures_Id", expenditures.delete);
 module.exports=router;
