@@ -83,6 +83,7 @@ app.use("", rutasProtegidas,require("./routes/costs.routes"));
 app.use("", rutasProtegidas,require("./routes/expenses.routes"));
 app.use("",rutasProtegidas,require("./routes/company.routes"));
 app.use("",rutasProtegidas,require("./routes/expenditures.routes"));
+app.use("",rutasProtegidas,require("./routes/status_result.routes"));
 
 
 
