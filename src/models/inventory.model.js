@@ -66,7 +66,7 @@ Inventory.getNotPerishable = result => {
 
 //Inventory Group
 Inventory.getGroup = result => {
-    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product, pp.Name as Product, b.Name as Brand, pc.Name as Category, SUM(i.Stock) as Stock, ROUND(SUM(i.Stock *i.Unit_Price)/SUM(i.Stock),2) as Precio FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id Group by pp.Name", (err, res) => {
+    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product, pp.Name as Product, b.Name as Brand, pc.Name as Category, SUM(i.Stock) as Stock, ROUND(SUM(i.Stock *i.Unit_Price)/SUM(i.Stock),2) as Precio FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id where i.Stock >= 1 Group by pp.Name", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
