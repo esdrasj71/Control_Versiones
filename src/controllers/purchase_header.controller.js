@@ -13,8 +13,6 @@ exports.create = (req, res) => {
     Serie: req.body.Serie,
     Date_Purchase: req.body.Date_Purchase,
     Total: req.body.Total,
-    Refund:req.body.Refund,
-    Annulment_State:req.body.Annulment_State,
     Payment_Complete:req.body.Payment_Complete,
     Observations:req.body.Observations,
     Providers_Id:req.body.Providers_Id

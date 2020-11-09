@@ -5,8 +5,6 @@ const Purchase_Header = function(purchase_header){
     this.Serie = purchase_header.Serie;
     this.Date_Purchase = purchase_header.Date_Purchase;
     this.Total = purchase_header.Total;
-    this.Refund = purchase_header.Refund; 
-    this.Annulment_State = purchase_header.Annulment_State;
     this.Payment_Complete = purchase_header.Payment_Complete;
     this.Observations = purchase_header.Observations;
     this.Providers_Id = purchase_header.Providers_Id;
@@ -58,8 +56,8 @@ Purchase_Header.getAll = result => {
 
 //ACTUALIZA ID
 Purchase_Header.updateById = (id, purchaseHeader, result) => {
-    sql.query("UPDATE purchase_header SET Correlative_Number = ?, Serie = ? Date_Purchase = ?, Total = ?, Refund = ?, Annualment_State =?,Payment_Complete =?, Observations = ?, Providers_Id = ?  WHERE Purchase_Header_Id = ?",
-      [purchaseHeader.Correlative_Number, purchaseHeader.Serie, purchaseHeader.Date_Purchase, purchaseHeader.Total, purchaseHeader.Refund, purchaseHeader.Annulment_State,purchaseHeader.Payment_Complete ,purchaseHeader.Observations, purchaseHeader.Providers_Id, id],
+    sql.query("UPDATE purchase_header SET Correlative_Number = ?, Serie = ? Date_Purchase = ?, Total = ?,Payment_Complete =?, Observations = ?, Providers_Id = ?  WHERE Purchase_Header_Id = ?",
+      [purchaseHeader.Correlative_Number, purchaseHeader.Serie, purchaseHeader.Date_Purchase, purchaseHeader.Total,purchaseHeader.Payment_Complete ,purchaseHeader.Observations, purchaseHeader.Providers_Id, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
