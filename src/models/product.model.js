@@ -41,7 +41,7 @@ Product.findById = (productId, result) => {
   };
 
 Product.getAll = result => {
-  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name as Names, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete, CASE p.Perishable WHEN 1 THEN 'Sí' WHEN 0 THEN 'No' END AS Perish FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join lot as l on l.Product_Id = p.Product_Id GROUP BY p.Product_Id, p.Product_Category_Id,p.Brand_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
+  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete, CASE p.Perishable WHEN 1 THEN 'Sí' WHEN 0 THEN 'No' END AS Perish FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join lot as l on l.Product_Id = p.Product_Id GROUP BY p.Product_Id, p.Product_Category_Id,p.Brand_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
