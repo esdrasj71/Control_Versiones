@@ -19,7 +19,7 @@ Accounts_Receivable.getAll = result => {
 
 
 Accounts_Receivable.getFacturas = (Customers_Id, result) => {
-    sql.query(`SELECT b.Bill_header_Id, b.Correlative_Number, b.Serie, a.Total-a.Quantity as Total, b.Date FROM bill_header as b INNER JOIN accounts_receivable a on a.Bill_header_Id = b.Bill_header_Id WHERE  a.Statuss != 0 and  b.Customers_Id  = ${Customers_Id}`, (err, res) => {
+    sql.query(`SELECT b.Bill_header_Id, b.Correlative_Number,  s.Nombre as Serie, a.Total-a.Quantity as Total, b.Date FROM bill_header as b INNER JOIN accounts_receivable a on a.Bill_header_Id = b.Bill_header_Id INNER JOIN serie as s on s.Serie_Id = b.Serie_Id WHERE  a.Statuss != 0 and  b.Customers_Id  = ${Customers_Id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
