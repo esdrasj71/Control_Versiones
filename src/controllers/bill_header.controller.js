@@ -11,29 +11,13 @@ exports.create = (req, res) => {
     // Create Bill header
     const bill_header = new Bill_Header({
         Correlative_Number: req.body.Correlative_Number,
-        Serie: req.body.Serie,
         Date: req.body.Date,
         Total: req.body.Total,
-        Refund: req.body.Refund,
-        Annulment_State: req.body.Annulment_State,
         Payment_Complete: req.body.Payment_Complete,
         Customers_Id: req.body.Customers_Id,
-        Employee_Id: parseInt(req.body.Employee_Id)
+        Employee_Id: parseInt(req.body.Employee_Id),
+        Serie_Id:  parseInt(req.body.Serie_Id),
     });
-    const Procedure_Sales = new proedure_sales({
-            Correlative_Number: req.body.Correlative_Number,
-            Serie: req.body.Serie,
-            Date: req.body.Date,
-            Total: req.body.Total,
-            Refund: req.body.Refund,
-            Annulment_State: req.body.Annulment_State,
-            Customers_Id: req.body.Customers_Id,
-            Employee_Id: req.body.Employee_Id,
-            Subtotal: req.body.Subtotal,
-            Quantity: req.body.Quantity,
-            Price: req.body.Price,
-            Iventory_Id: req.body.Iventory_Id
-        })
         // Save bill header
     Bill_Header.create(bill_header, (err, data) => {
         if (err)
@@ -45,7 +29,7 @@ exports.create = (req, res) => {
 };
 
 //Generate NoFactura bill header
-exports.findNoFactura = (req, res) => {
+/*exports.findNoFactura = (req, res) => {
     Bill_Header.getNoFactura((err, data) => {
         if (err)
             res.status(500).send({
@@ -54,7 +38,28 @@ exports.findNoFactura = (req, res) => {
         else res.send(data);
 
     })
-}
+}*/
+
+exports.findNoFactura = (req, res) => {
+    // Validating request
+    
+    //update product with your id
+    Bill_Header.getNoFactura(req.params.Serie_Id,(err, data) => {
+            if (err) {
+                if (err.kind === "We can't find the product to update") {
+                    res.status(404).send({
+                        message: `Inventario con ID no encontrado ${req.params.Serie_Id}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Inventario con ID no encontrado " + req.params.Serie_Id
+                    });
+                }
+            } else res.send(data);
+        }
+    );
+};
+
 
 //GET ALL
 exports.findAll = (req, res) => {

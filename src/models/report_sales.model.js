@@ -47,7 +47,7 @@ Report_Sales.getReport2 = (newReport, result) => {
 };
 
 Report_Sales.getSerie = result => {
-    sql.query("SELECT DISTINCT(Serie) as Serie FROM bill_header;", (err, res) => {
+    sql.query("SELECT Serie_Id, Nombre as Serie FROM serie;", (err, res) => {
         if (err) {
             console.log("Error: ", err);
             result(err, null);
