@@ -87,6 +87,7 @@ app.use("", rutasProtegidas,require("./routes/company.routes"));
 app.use("", rutasProtegidas,require("./routes/expenditures.routes"));
 app.use("", rutasProtegidas,require("./routes/series.routes"));
 app.use("", rutasProtegidas,require("./routes/balance_sheet.routes"));
+app.use("", rutasProtegidas,require("./routes/balance_detail.routes"));
 
 
 

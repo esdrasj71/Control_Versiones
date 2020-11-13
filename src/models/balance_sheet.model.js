@@ -2,6 +2,7 @@ const sql = require("../conexion.js");
 const Balance_Sheet = function(balance_sheet) {
     this.fechafin = balance_sheet.fechafin;
 };
+
 Balance_Sheet.getbalance = (newBalance, result) => {
     //console.log(newReport);
 
@@ -17,5 +18,6 @@ Balance_Sheet.getbalance = (newBalance, result) => {
        
     });
 };
+
 
 module.exports = Balance_Sheet;
