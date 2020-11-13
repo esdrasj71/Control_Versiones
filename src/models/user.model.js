@@ -31,7 +31,6 @@ User.create = async (newUser, result) => {
         result(err, null);
         return;
       }
-  
       if (res.length) {
         console.log("Usuario encontrado: ", res[0]);
         result(null, res[0]);
@@ -44,7 +43,7 @@ User.create = async (newUser, result) => {
   };
 
   User.getAll = result => {
-    sql.query("SELECT * FROM User ORDER BY Date_Created ASC", (err, res) => {
+    sql.query("SELECT a.Date_Created,a.User_Id,a.Username,a.Password, CASE a.Usertype WHEN 1 then 'Administrador' WHEN 0 then 'Usuario Normal' END as Tipo, concat(p.Names, ', ' ,p.Last_names) as Nombre FROM User as a INNER JOIN Employee as p on a.Employee_Id=p.Employee_Id ORDER BY a.Date_Created DESC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -56,10 +55,11 @@ User.create = async (newUser, result) => {
     });
   };
 
-  User.updateById = (id, user, result) => {
+  User.updateById = async (id, user, result) => {
+    user.Password= await bcrypt.hash(user.Password, 8);
     sql.query(
-      "UPDATE user SET Username = ?, Password = ?, Date_Created = ?, Usertype = ?, Employee_Id = ? WHERE User_Id = ?",
-      [user.Username, user.Password, user.Date_Created,user.Usertype, user.Employee_Id, id],
+      "UPDATE user SET Username = ?, Password = ? WHERE User_Id = ?",
+      [user.Username, user.Password, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
