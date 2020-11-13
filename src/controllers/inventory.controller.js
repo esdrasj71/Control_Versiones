@@ -11,6 +11,7 @@ exports.create = (req, res) => {
     const inventory = new Inventory({
         Stock: req.body.Stock,
         Unit_Price: req.body.Unit_Price,
+        Purchase_Price: req.body.Purchase_Price,
         Lot_Id: req.body.Lot_Id,
         Statuss: req.body.Statuss,
     });
