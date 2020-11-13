@@ -38,6 +38,19 @@ exports.findAll = (req, res) => {
       else res.send(data);
     });
   };
+//ProductLot
+//GET ALL
+exports.findProductLot = (req, res) => {
+  //Get all supplier data
+  Product.getProductLot((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Ha ocurrido un error"
+      });
+    else res.send(data);
+  });
+};
 //GET ONE
   exports.findOne = (req, res) => {
     //We obtain the product with its id
