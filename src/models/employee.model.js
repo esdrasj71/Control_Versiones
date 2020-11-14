@@ -59,7 +59,7 @@ Employee.getAll = result => {
 };
 //Employeenonuser
 Employee.getLogin = result => {
-  sql.query("SELECT *, p.Name as Posicion, CASE e.Gender WHEN 1 then 'Masculino' WHEN 0 then 'Femenino' END as SEXO FROM Employee as e INNER JOIN employee_position as p ON p.Employee_Position_Id = e.Employee_Position_Id left join user as u on u.Employee_Id = e.Employee_Id where u.Employee_Id is null ORDER BY e.Names ASC", (err, res) => {
+  sql.query("SELECT *, e.Employee_Id, p.Name as Posicion, CASE e.Gender WHEN 1 then 'Masculino' WHEN 0 then 'Femenino' END as SEXO FROM Employee as e INNER JOIN employee_position as p ON p.Employee_Position_Id = e.Employee_Position_Id left join user as u on u.Employee_Id = e.Employee_Id where u.Employee_Id is null ORDER BY e.Names ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
