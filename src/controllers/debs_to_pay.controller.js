@@ -36,6 +36,17 @@ exports.findAllDebs = (req, res) => {
     else res.send(data);
   });
 };
+//Total
+exports.findTotal = (req, res) => {
+  Debs_To_Pay.getTotal((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Ha ocurrido un error!"
+      });
+    else res.send(data);
+  });
+};
 
 exports.findOneDebs = (req, res) => {
   Debs_To_Pay.findByIdDebs(req.params.debstopayId, (err, data) => {

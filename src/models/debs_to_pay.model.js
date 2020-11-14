@@ -53,6 +53,18 @@ Debs_To_Pay.getAllDebs = result => {
     result(null, res);
   });
 };
+//Total
+Debs_To_Pay.getTotal = result => {
+  sql.query("SELECT SUM(Total-Quantity) as Total from debs_to_pay", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Proveedores a pagar: ", res);
+    result(null, res);
+  });
+};
 
 Debs_To_Pay.findByIdPurchase = (purchaseheaderId, result) => {
   sql.query(`SELECT a.Purchase_Header_Id, a.Correlative_Number, concat(e.Name,', ', f.Name, ', ',g.Name) as ProductComplete ,c.Lot_Id, b.Quantity, b.Unit_Price, b.SubTotal

@@ -35,6 +35,17 @@ exports.findAll = (req, res) => {
         else res.send(data);
     });
 };
+//Total
+exports.findTotal = (req, res) => {
+    //Get all supplier data
+    Inventory.getTotal((err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Ha ocurrido un error!"
+            });
+        else res.send(data);
+    });
+};
 // NO PERECEDERO
 exports.findNoPerishable = (req, res) => {
     //Get all supplier data
