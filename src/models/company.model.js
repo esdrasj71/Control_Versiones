@@ -19,7 +19,7 @@ Company.create = (newCompany, result) => {
   };
 
   Company.getAll = result => {
-    sql.query("SELECT * FROM COMPANY", (err, res) => {
+    sql.query("SELECT * FROM Company", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

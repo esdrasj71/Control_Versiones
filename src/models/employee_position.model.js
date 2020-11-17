@@ -7,7 +7,7 @@ const Employee_Position = function(employee_position){
 //Creacion de CRUD
     //CREATE
 Employee_Position.create = (newPosition, result) => {
-    sql.query("INSERT INTO employee_position SET ?", newPosition, (err, res)=>{
+    sql.query("INSERT INTO Employee_Position SET ?", newPosition, (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -37,7 +37,7 @@ Employee_Position.findById = (employee_position_id, result) => {
 };
 //BUSCAR TODO
 Employee_Position.getAll = result => {
-    sql.query("SELECT * FROM employee_position ORDER BY Name ASC", (err, res) => {
+    sql.query("SELECT * FROM Employee_Position ORDER BY Name ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
