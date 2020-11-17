@@ -8,11 +8,12 @@ exports.create = (req, res) => {
     });
   }
   // Create user
-  let fecha = new Date();
+
+  let fecha = new Date;
   const user = new User({
     Username: req.body.Username,
     Password: req.body.Password,
-    Date_Created:fecha,
+    Date_Created: fecha,
     Usertype:req.body.Usertype,
     Employee_Id:req.body.Employee_Id
   });

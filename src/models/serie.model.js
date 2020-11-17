@@ -6,7 +6,7 @@ const Serie = function(series){
     this.Cantidad_limite = series.Cantidad_limite;
 }
 Serie.create = (newSeries, result) => {
-    sql.query("INSERT INTO serie SET ?", newSeries, (err, res) => {
+    sql.query("INSERT INTO Serie SET ?", newSeries, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -18,7 +18,7 @@ Serie.create = (newSeries, result) => {
   };
 
   Serie.getAll = result => {
-    sql.query("SELECT * FROM serie", (err, res) => {
+    sql.query("SELECT * FROM Serie", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
