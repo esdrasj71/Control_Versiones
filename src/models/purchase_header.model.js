@@ -12,7 +12,7 @@ const Purchase_Header = function(purchase_header){
 //Creacion de CRUD
     //CREATE
 Purchase_Header.create = (newPurchaseHeader, result) => {
-    sql.query("INSERT INTO purchase_header SET ?", newPurchaseHeader, (err, res)=>{
+    sql.query("INSERT INTO Purchase_Header SET ?", newPurchaseHeader, (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -24,7 +24,7 @@ Purchase_Header.create = (newPurchaseHeader, result) => {
 };
     //BUSCAR POR ID
 Purchase_Header.findById = (PurchaseHeaderId, result) => {
-    sql.query(`SELECT * FROM purchase_header WHERE Purchase_Header_Id = ${PurchaseHeaderId}`, (err,res)=>{
+    sql.query(`SELECT * FROM Purchase_Header WHERE Purchase_Header_Id = ${PurchaseHeaderId}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -42,7 +42,7 @@ Purchase_Header.findById = (PurchaseHeaderId, result) => {
 };
 //BUSCAR TODO
 Purchase_Header.getAll = result => {
-    sql.query("SELECT * FROM purchase_header", (err, res) => {
+    sql.query("SELECT * FROM Purchase_Header", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -56,7 +56,7 @@ Purchase_Header.getAll = result => {
 
 //ACTUALIZA ID
 Purchase_Header.updateById = (id, purchaseHeader, result) => {
-    sql.query("UPDATE purchase_header SET Correlative_Number = ?, Serie = ? Date_Purchase = ?, Total = ?,Payment_Complete =?, Observations = ?, Providers_Id = ?  WHERE Purchase_Header_Id = ?",
+    sql.query("UPDATE Purchase_Header SET Correlative_Number = ?, Serie = ? Date_Purchase = ?, Total = ?,Payment_Complete =?, Observations = ?, Providers_Id = ?  WHERE Purchase_Header_Id = ?",
       [purchaseHeader.Correlative_Number, purchaseHeader.Serie, purchaseHeader.Date_Purchase, purchaseHeader.Total,purchaseHeader.Payment_Complete ,purchaseHeader.Observations, purchaseHeader.Providers_Id, id],
       (err, res) => {
         if (err) {
@@ -78,7 +78,7 @@ Purchase_Header.updateById = (id, purchaseHeader, result) => {
   };
 
   Purchase_Header.remove = (id, result) => {
-    sql.query("DELETE FROM purchase_header WHERE Purchase_Header_Id = ?", id, (err, res) => {
+    sql.query("DELETE FROM Purchase_Header WHERE Purchase_Header_Id = ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

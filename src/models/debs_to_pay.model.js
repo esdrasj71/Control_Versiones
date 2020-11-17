@@ -10,7 +10,7 @@ const Debs_To_Pay = function(debs_to_pay) {
 };
 
 Debs_To_Pay.create = (newDebstoPay, result) => {
-  sql.query("INSERT INTO Debs_to_pay SET ?", newDebstoPay, (err, res) => {
+  sql.query("INSERT INTO Debs_to_Pay SET ?", newDebstoPay, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -23,8 +23,8 @@ Debs_To_Pay.create = (newDebstoPay, result) => {
 
 Debs_To_Pay.findByIdDebs = (providersId, result) => {
   sql.query(`SELECT a.Debs_to_Pay_Id, b.Purchase_Header_Id, p.Providers_Id, p.Fiscal_Name, b.Correlative_Number, b.Serie, b.Date_Purchase, a.Total- a.Quantity
-  as Pay, b.Total FROM debs_to_pay as a inner join purchase_header as b on a.Purchase_Header_Id = b.Purchase_header_Id 
-  inner join providers as p on b.Providers_Id = p.Providers_Id 
+  as Pay, b.Total FROM Debs_to_Pay as a inner join Purchase_Header as b on a.Purchase_Header_Id = b.Purchase_header_Id 
+  inner join Providers as p on b.Providers_Id = p.Providers_Id 
   where a.Statuss = 1 and p.Providers_Id =  ${providersId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -43,7 +43,7 @@ Debs_To_Pay.findByIdDebs = (providersId, result) => {
 };
 
 Debs_To_Pay.getAllDebs = result => {
-  sql.query("SELECT a.Debs_to_Pay_Id,p.Providers_Id, b.Purchase_Header_Id,p.Fiscal_Name, p.NIT, p.Phone_Number1, SUM(a.Total - a.Quantity) as Pay FROM debs_to_pay as a inner join purchase_header as b on a.Purchase_Header_Id = b.Purchase_header_Id  inner join providers as p on b.Providers_Id = p.Providers_Id where a.Statuss = 1 group by p.Fiscal_Name", (err, res) => {
+  sql.query("SELECT a.Debs_to_Pay_Id,p.Providers_Id, b.Purchase_Header_Id,p.Fiscal_Name, p.NIT, p.Phone_Number1, SUM(a.Total - a.Quantity) as Pay FROM Debs_to_Pay as a inner join Purchase_Header as b on a.Purchase_Header_Id = b.Purchase_header_Id  inner join Providers as p on b.Providers_Id = p.Providers_Id where a.Statuss = 1 group by p.Fiscal_Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -55,7 +55,7 @@ Debs_To_Pay.getAllDebs = result => {
 };
 //Total
 Debs_To_Pay.getTotal = result => {
-  sql.query("SELECT SUM(Total-Quantity) as Total from debs_to_pay", (err, res) => {
+  sql.query("SELECT SUM(Total-Quantity) as Total from Debs_to_Pay", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -68,12 +68,12 @@ Debs_To_Pay.getTotal = result => {
 
 Debs_To_Pay.findByIdPurchase = (purchaseheaderId, result) => {
   sql.query(`SELECT a.Purchase_Header_Id, a.Correlative_Number, concat(e.Name,', ', f.Name, ', ',g.Name) as ProductComplete ,c.Lot_Id, b.Quantity, b.Unit_Price, b.SubTotal
-    from purchase_header as a inner join purchase_detail as b on a.Purchase_Header_Id = b.Purchase_Header_Id
-    inner join inventory as c on c.Inventory_Id = b.Inventory_Id
-    inner join lot as d on d.Lot_Id = c.Lot_Id
-    inner join product as e on e.Product_Id = d.Product_Id
-    inner join brand as f on e.Brand_Id = f.Brand_Id
-    inner join product_category as g on e.Product_Category_Id = g.Product_Category_Id 
+    from Purchase_Header as a inner join Purchase_Detail as b on a.Purchase_Header_Id = b.Purchase_Header_Id
+    inner join Inventory as c on c.Inventory_Id = b.Inventory_Id
+    inner join Lot as d on d.Lot_Id = c.Lot_Id
+    inner join Product as e on e.Product_Id = d.Product_Id
+    inner join Brand as f on e.Brand_Id = f.Brand_Id
+    inner join Product_Category as g on e.Product_Category_Id = g.Product_Category_Id 
     where a.Purchase_Header_Id = ${purchaseheaderId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);

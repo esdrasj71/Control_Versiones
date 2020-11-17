@@ -11,7 +11,7 @@ const Bill_Detail = function(bill_detail) {
 
 //CRUD
 Bill_Detail.create = (newBill, result) => {
-  sql.query("INSERT INTO bill_detail SET ?", newBill, (err, res) => {
+  sql.query("INSERT INTO Bill_Detail SET ?", newBill, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -23,7 +23,7 @@ Bill_Detail.create = (newBill, result) => {
 };
 
 Bill_Detail.findById = (Bill_Detail_Id, result) => {
-  sql.query(`SELECT * FROM bill_detail WHERE Bill_Detail_Id = ${Bill_Detail_Id}`, (err, res) => {
+  sql.query(`SELECT * FROM Bill_Detail WHERE Bill_Detail_Id = ${Bill_Detail_Id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -41,7 +41,7 @@ Bill_Detail.findById = (Bill_Detail_Id, result) => {
 };
 
 Bill_Detail.getAll = result => {
-  sql.query("SELECT * FROM bill_detail", (err, res) => {
+  sql.query("SELECT * FROM Bill_Detail", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -54,7 +54,7 @@ Bill_Detail.getAll = result => {
 
 Bill_Detail.updateById = (id, bill_detail, result) => {
   sql.query(
-    "UPDATE bill_detail SET Subtotal = ?, Quantity = ?, Price = ?, Bill_header_Id = ?, Inventory_Id = ? WHERE Bill_Detail_Id = ?",
+    "UPDATE Bill_Detail SET Subtotal = ?, Quantity = ?, Price = ?, Bill_header_Id = ?, Inventory_Id = ? WHERE Bill_Detail_Id = ?",
     [bill_detail.Subtotal, bill_detail.Quantity, bill_detail.Price, bill_detail.Bill_header_Id, bill_detail.Inventory_Id, id],
     (err, res) => {
       if (err) {
@@ -75,7 +75,7 @@ Bill_Detail.updateById = (id, bill_detail, result) => {
 };
 
 Bill_Detail.remove = (id, result) => {
-  sql.query("DELETE FROM bill_detail WHERE Bill_Detail_Id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Bill_Detail WHERE Bill_Detail_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

@@ -48,7 +48,7 @@ Company.create = (newCompany, result) => {
           return;
         }
   
-        console.log("updated provider: ", { id: id, ...company });
+        console.log("updated company: ", { id: id, ...company });
         result(null, { id: id, ...company });
       }
     );

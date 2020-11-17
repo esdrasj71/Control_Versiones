@@ -7,7 +7,7 @@ const Bill_Type = function(bill_type) {
 
 //CRUD
 Bill_Type.create = (newBill_Type, result) => {
-  sql.query("INSERT INTO bill_type SET ?", newBill_Type, (err, res) => {
+  sql.query("INSERT INTO Bill_Type SET ?", newBill_Type, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ Bill_Type.create = (newBill_Type, result) => {
 };
 
 Bill_Type.findById = (billtypeId, result) => {
-  sql.query(`SELECT * FROM bill_type WHERE bill_type_id = ${billtypeId}`, (err, res) => {
+  sql.query(`SELECT * FROM Bill_Type WHERE Bill_Type_Id = ${billtypeId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -38,7 +38,7 @@ Bill_Type.findById = (billtypeId, result) => {
 };
 
 Bill_Type.getAll = result => {
-  sql.query("SELECT * FROM bill_type ORDER BY Name", (err, res) => {
+  sql.query("SELECT * FROM Bill_Type ORDER BY Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Bill_Type.getAll = result => {
 
 Bill_Type.updateById = (id, bill_type, result) => {
   sql.query(
-    "UPDATE bill_type SET name = ? WHERE bill_type_id = ?",
+    "UPDATE Bill_Type SET name = ? WHERE Bill_Type_Id = ?",
     [bill_type.Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Bill_Type.updateById = (id, bill_type, result) => {
 };
 
 Bill_Type.remove = (id, result) => {
-  sql.query("DELETE FROM bill_type WHERE bill_type_id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Bill_Type WHERE Bill_Type_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

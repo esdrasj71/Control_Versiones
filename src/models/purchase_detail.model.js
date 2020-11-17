@@ -10,7 +10,7 @@ const Purchase_Detail = function(purchase_detail){
 //Creacion de CRUD
     //CREATE
 Purchase_Detail.create = (newPurchaseDetail, result) => {
-    sql.query("INSERT INTO purchase_detail SET ?", newPurchaseDetail, (err, res)=>{
+    sql.query("INSERT INTO Purchase_Detail SET ?", newPurchaseDetail, (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -22,7 +22,7 @@ Purchase_Detail.create = (newPurchaseDetail, result) => {
 };
     //BUSCAR POR ID
 Purchase_Detail.findById = (PurchaseDetailId, result) => {
-    sql.query(`SELECT * FROM purchase_detail WHERE Purchase_Detail_Id = ${PurchaseDetailId}`, (err,res)=>{
+    sql.query(`SELECT * FROM Purchase_Detail WHERE Purchase_Detail_Id = ${PurchaseDetailId}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -40,7 +40,7 @@ Purchase_Detail.findById = (PurchaseDetailId, result) => {
 };
 //BUSCAR TODO
 Purchase_Detail.getAll = result => {
-    sql.query("SELECT * FROM purchase_detail", (err, res) => {
+    sql.query("SELECT * FROM Purchase_Detail", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -54,7 +54,7 @@ Purchase_Detail.getAll = result => {
 
 //ACTUALIZA ID
 Purchase_Detail.updateById = (id, purchaseDetail, result) => {
-    sql.query("UPDATE purchase_detail SET Quantity = ?, Unit_Price = ?, Subtotal = ?, Purchase_Header_Id = ?, Inventory_Id = ?  WHERE Purchase_Detail_Id = ?",
+    sql.query("UPDATE Purchase_Detail SET Quantity = ?, Unit_Price = ?, Subtotal = ?, Purchase_Header_Id = ?, Inventory_Id = ?  WHERE Purchase_Detail_Id = ?",
       [purchaseDetail.Quantity, purchaseDetail.Unit_Price, purchaseDetail.Subtotal, purchaseDetail.Purchase_Header_Id , purchaseDetail.Inventory_Id, id],
       (err, res) => {
         if (err) {
@@ -76,7 +76,7 @@ Purchase_Detail.updateById = (id, purchaseDetail, result) => {
   };
 
   Purchase_Detail.remove = (id, result) => {
-    sql.query("DELETE FROM purchase_detail WHERE Purchase_Detail_Id = ?", id, (err, res) => {
+    sql.query("DELETE FROM Purchase_Detail WHERE Purchase_Detail_Id = ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

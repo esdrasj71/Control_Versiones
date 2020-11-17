@@ -11,7 +11,7 @@ const Product = function (product) {
 
 //CRUD
 Product.create = (newProduct, result) => {
-  sql.query("INSERT INTO product SET ?", newProduct, (err, res) => {
+  sql.query("INSERT INTO Product SET ?", newProduct, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -24,7 +24,7 @@ Product.create = (newProduct, result) => {
 
 Product.findById = (productId, result) => {
 
-  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, l.Lot_Id,p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join lot as l on l.product_id=p.product_id WHERE p.Correlative_Product = ? or p.Product_Id= ?",[productId,productId], (err, res) => {
+  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, l.Lot_Id,p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM Product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join Lot as l on l.product_id=p.product_id WHERE p.Correlative_Product = ? or p.Product_Id= ?",[productId,productId], (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -41,7 +41,7 @@ Product.findById = (productId, result) => {
   };
 
 Product.getAll = result => {
-  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete, CASE p.Perishable WHEN 1 THEN 'Sí' WHEN 0 THEN 'No' END AS Perish FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join lot as l on l.Product_Id = p.Product_Id GROUP BY p.Product_Id, p.Product_Category_Id,p.Brand_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
+  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete, CASE p.Perishable WHEN 1 THEN 'Sí' WHEN 0 THEN 'No' END AS Perish FROM Product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join Lot as l on l.Product_Id = p.Product_Id GROUP BY p.Product_Id, p.Product_Category_Id,p.Brand_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -54,7 +54,7 @@ Product.getAll = result => {
 
 //ProductLot
 Product.getProductLot = result => {
-  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete, CASE p.Perishable WHEN 1 THEN 'Sí' WHEN 0 THEN 'No' END AS Perish FROM product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join lot as l on l.Product_Id = p.Product_Id  where p.Perishable = 1 GROUP BY p.Product_Id, p.Product_Category_Id,p.Brand_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
+  sql.query("SELECT p.Product_Id, p.Product_Category_Id,p.Brand_Id, p.Name, b.Name as Brand, pc.Name as Category, p.Perishable, p.Correlative_Product, l.Due_Date as DueDate, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete, CASE p.Perishable WHEN 1 THEN 'Sí' WHEN 0 THEN 'No' END AS Perish FROM Product as p inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id left join Lot as l on l.Product_Id = p.Product_Id  where p.Perishable = 1 GROUP BY p.Product_Id, p.Product_Category_Id,p.Brand_Id ORDER BY YEAR(DueDate) DESC, MONTH(DueDate) DESC, DAY(DueDate) ASC, p.Name ASC", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -67,7 +67,7 @@ Product.getProductLot = result => {
 
 Product.updateById = (id, product, result) => {
   sql.query(
-    "UPDATE product SET Name = ?, Perishable = ?, Correlative_Product = ?, Brand_Id = ?, Product_Category_Id = ? WHERE Product_Id = ?", [product.Name, product.Perishable, product.Correlative_Product, product.Brand_Id, product.Product_Category_Id, id],
+    "UPDATE Product SET Name = ?, Perishable = ?, Correlative_Product = ?, Brand_Id = ?, Product_Category_Id = ? WHERE Product_Id = ?", [product.Name, product.Perishable, product.Correlative_Product, product.Brand_Id, product.Product_Category_Id, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -87,7 +87,7 @@ Product.updateById = (id, product, result) => {
 };
 
 Product.remove = (id, result) => {
-  sql.query("DELETE FROM product WHERE product_id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Product WHERE Product_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -105,7 +105,7 @@ Product.remove = (id, result) => {
 };
 
 Product.removeAll = result => {
-  sql.query("DELETE FROM product", (err, res) => {
+  sql.query("DELETE FROM Product", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

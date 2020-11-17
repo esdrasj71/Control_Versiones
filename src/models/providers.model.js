@@ -11,7 +11,7 @@ const Providers = function(providers) {
 };
 //CRUD
 Providers.create = (newProviders, result) => {
-    sql.query("INSERT INTO providers SET ?", newProviders, (err, res) => {
+    sql.query("INSERT INTO Providers SET ?", newProviders, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -23,7 +23,7 @@ Providers.create = (newProviders, result) => {
   };
 
   Providers.findById = (providersId, result) => {
-    sql.query(`SELECT * FROM providers WHERE providers_id = ${providersId}`, (err, res) => {
+    sql.query(`SELECT * FROM Providers WHERE Providers_Id = ${providersId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -42,7 +42,7 @@ Providers.create = (newProviders, result) => {
   };
 
   Providers.getAll = result => {
-    sql.query("SELECT * FROM providers ORDER BY Fiscal_Name ASC", (err, res) => {
+    sql.query("SELECT * FROM Providers ORDER BY Fiscal_Name ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -56,7 +56,7 @@ Providers.create = (newProviders, result) => {
 
   Providers.updateById = (id, providers, result) => {
     sql.query(
-      "UPDATE providers SET nit = ?, fiscal_name = ?, phone_number1 = ?, phone_number2 = ?, email = ?, address = ? WHERE providers_id = ?",
+      "UPDATE Providers SET NIT = ?, Fiscal_Name = ?, Phone_Number1 = ?, Phone_Number2 = ?, Email = ?, Address = ? WHERE Providers_Id = ?",
       [providers.NIT, providers.Fiscal_Name, providers.Phone_Number1,providers.Phone_Number2, providers.Email, providers.Address, id],
       (err, res) => {
         if (err) {
@@ -78,7 +78,7 @@ Providers.create = (newProviders, result) => {
   };
 
   Providers.remove = (id, result) => {
-    sql.query("DELETE FROM providers WHERE providers_id = ?", id, (err, res) => {
+    sql.query("DELETE FROM Providers WHERE Providers_Id = ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

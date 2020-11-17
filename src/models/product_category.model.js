@@ -6,7 +6,7 @@ const Product_Category = function(product_category) {
 };
 
 Product_Category.create = (newProduct_Category, result) => {
-  sql.query("INSERT INTO product_category SET ?", newProduct_Category, (err, res) => {
+  sql.query("INSERT INTO Product_Category SET ?", newProduct_Category, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -18,7 +18,7 @@ Product_Category.create = (newProduct_Category, result) => {
 };
 
 Product_Category.findById = (product_categoryId, result) => {
-  sql.query(`SELECT * FROM product_category WHERE product_category_id = ${product_categoryId}`, (err, res) => {
+  sql.query(`SELECT * FROM Product_Category WHERE Product_Category_id = ${product_categoryId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -37,7 +37,7 @@ Product_Category.findById = (product_categoryId, result) => {
 };
 
 Product_Category.getAll = result => {
-  sql.query("SELECT * FROM product_category ORDER BY Name", (err, res) => {
+  sql.query("SELECT * FROM Product_Category ORDER BY Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Product_Category.getAll = result => {
 
 Product_Category.updateById = (id, product_category, result) => {
   sql.query(
-    "UPDATE product_category SET name = ? WHERE product_category_id  = ?",
+    "UPDATE Product_Category SET name = ? WHERE Product_Category_Id  = ?",
     [product_category.Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Product_Category.updateById = (id, product_category, result) => {
 };
 
 Product_Category.remove = (id, result) => {
-  sql.query("DELETE FROM product_category WHERE product_category_id  = ?", id, (err, res) => {
+  sql.query("DELETE FROM Product_Category WHERE Product_Category_Id  = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -92,7 +92,7 @@ Product_Category.remove = (id, result) => {
 };
 
 Product_Category.removeAll = result => {
-  sql.query("DELETE FROM product_category", (err, res) => {
+  sql.query("DELETE FROM Product_Category", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

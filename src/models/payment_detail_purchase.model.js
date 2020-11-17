@@ -10,7 +10,7 @@ const Payment_Detail_Purchase = function(payment_detail_purchase) {
 
 //CRUD
 Payment_Detail_Purchase.create = (newPurchaseD, result) => {
-  sql.query("INSERT INTO payment_detail_purchase SET ?", newPurchaseD, (err, res) => {
+  sql.query("INSERT INTO Payment_Detail_Purchase SET ?", newPurchaseD, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -22,7 +22,7 @@ Payment_Detail_Purchase.create = (newPurchaseD, result) => {
 };
 
 Payment_Detail_Purchase.findById = (PaymentDetailId, result) => {
-    sql.query(`SELECT * FROM payment_detail_purchase WHERE Payment_Detail_Purchase_Id = ${PaymentDetailId}`, (err, res) => {
+    sql.query(`SELECT * FROM Payment_Detail_Purchase WHERE Payment_Detail_Purchase_Id = ${PaymentDetailId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -41,7 +41,7 @@ Payment_Detail_Purchase.findById = (PaymentDetailId, result) => {
   };
 
   Payment_Detail_Purchase.getAll = result => {
-    sql.query("SELECT * FROM payment_detail_purchase", (err, res) => {
+    sql.query("SELECT * FROM Payment_Detail_Purchase", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -54,7 +54,7 @@ Payment_Detail_Purchase.findById = (PaymentDetailId, result) => {
 
 Payment_Detail_Purchase.updateById = (id, paymentDetail, result) => {
   sql.query(
-"UPDATE payment_detail_purchase SET Method_Name=?,Total_Amount = ?, Description = ?, Purchase_Header_Id = ? WHERE Payment_Detail_Purchase_Id = ?",
+"UPDATE Payment_Detail_Purchase SET Method_Name=?,Total_Amount = ?, Description = ?, Purchase_Header_Id = ? WHERE Payment_Detail_Purchase_Id = ?",
 [paymentDetail.Method_Name,paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Purchase_Header_Id, id],
     (err, res) => {
       if (err) {
@@ -74,7 +74,7 @@ Payment_Detail_Purchase.updateById = (id, paymentDetail, result) => {
 };
 
 Payment_Detail_Purchase.remove = (id, result) => {
-  sql.query("DELETE FROM payment_detail_purchase WHERE Payment_Detail_Purchase_Id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Payment_Detail_Purchase WHERE Payment_Detail_Purchase_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

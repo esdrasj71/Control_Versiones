@@ -7,7 +7,7 @@ const Brand = function(brand) {
 
 //CRUD
 Brand.create = (newBrand, result) => {
-  sql.query("INSERT INTO brand SET ?", newBrand, (err, res) => {
+  sql.query("INSERT INTO Brand SET ?", newBrand, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ Brand.create = (newBrand, result) => {
 };
 
 Brand.findById = (brandId, result) => {
-  sql.query(`SELECT * FROM brand WHERE brand_id = ${brandId}`, (err, res) => {
+  sql.query(`SELECT * FROM Brand WHERE Brand_Id = ${brandId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -38,7 +38,7 @@ Brand.findById = (brandId, result) => {
 };
 
 Brand.getAll = result => {
-  sql.query("SELECT * FROM brand ORDER BY Name", (err, res) => {
+  sql.query("SELECT * FROM Brand ORDER BY Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Brand.getAll = result => {
 
 Brand.updateById = (id, brand, result) => {
   sql.query(
-    "UPDATE brand SET name = ? WHERE brand_id = ?",
+    "UPDATE Brand SET Name = ? WHERE Brand_id = ?",
     [brand.Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Brand.updateById = (id, brand, result) => {
 };
 
 Brand.remove = (id, result) => {
-  sql.query("DELETE FROM brand WHERE brand_id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Brand WHERE Brand_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -92,7 +92,7 @@ Brand.remove = (id, result) => {
 };
 
 Brand.removeAll = result => {
-  sql.query("DELETE FROM brand", (err, res) => {
+  sql.query("DELETE FROM Brand", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

@@ -19,7 +19,7 @@ Employee_Position.create = (newPosition, result) => {
 };
     //BUSCAR POR ID
 Employee_Position.findById = (employee_position_id, result) => {
-    sql.query(`SELECT * FROM employee_position WHERE Employee_Position_Id = ${employee_position_id}`, (err,res)=>{
+    sql.query(`SELECT * FROM Employee_Position WHERE Employee_Position_Id = ${employee_position_id}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -51,7 +51,7 @@ Employee_Position.getAll = result => {
 
 //ACTUALIZA ID
 Employee_Position.updateById = (id, position, result) => {
-    sql.query("UPDATE employee_position SET Name = ?, Description = ? WHERE Employee_Position_Id = ?",
+    sql.query("UPDATE Employee_Position SET Name = ?, Description = ? WHERE Employee_Position_Id = ?",
       [position.Name, position.Description, id],
       (err, res) => {
         if (err) {
@@ -73,7 +73,7 @@ Employee_Position.updateById = (id, position, result) => {
   };
 
   Employee_Position.remove = (id, result) => {
-    sql.query("DELETE FROM employee_position WHERE Employee_Position_Id = ?", id, (err, res) => {
+    sql.query("DELETE FROM Employee_Position WHERE Employee_Position_Id = ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

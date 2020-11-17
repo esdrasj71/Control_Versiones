@@ -11,7 +11,7 @@ const Inventory = function(inventory) {
 
 //CRUD
 Inventory.create = (newInventory, result) => {
-    sql.query("INSERT INTO inventory SET ?", newInventory, (err, res) => {
+    sql.query("INSERT INTO Inventory SET ?", newInventory, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -24,7 +24,7 @@ Inventory.create = (newInventory, result) => {
 
 Inventory.findById = (Inventario_Id, result) => {
 
-    sql.query(`SELECT i.Inventory_Id, l.Lot_Id, pp.Correlative_Product as Correlative_Product, i.Stock, i.Unit_Price, i.Purchase_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join  product as pp on l.Product_Id = pp.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
+    sql.query(`SELECT i.Inventory_Id, l.Lot_Id, pp.Correlative_Product as Correlative_Product, i.Stock, i.Unit_Price, i.Purchase_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM Inventory as i left join Lot as l on i.Lot_Id = l.Lot_Id inner join  Product as pp on l.Product_Id = pp.Product_Id inner join Brand as b on pp.Brand_Id = b.Brand_Id inner join Product_Category as pc on pp.Product_Category_Id = pc.Product_Category_Id WHERE Inventory_Id = ${Inventario_Id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -41,7 +41,7 @@ Inventory.findById = (Inventario_Id, result) => {
 };
 
 Inventory.getAll = result => {
-    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, l.Due_Date as DueDate, i.Stock, i.Unit_Price, i.Purchase_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id where i.Stock >= 1 order by i.Inventory_Id", (err, res) => {
+    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, l.Due_Date as DueDate, i.Stock, i.Unit_Price, i.Purchase_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM Inventory as i left join Lot as l on i.Lot_Id = l.Lot_Id inner join Product as pp on pp.Product_Id = l.Product_Id inner join Brand as b on pp.Brand_Id = b.Brand_Id inner join Product_Category as pc on pp.Product_Category_Id = pc.Product_Category_Id where i.Stock >= 1 order by i.Inventory_Id", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -53,7 +53,7 @@ Inventory.getAll = result => {
 };
 //Total Mercaderia
 Inventory.getTotal = result => {
-    sql.query("SELECT SUM(Stock * Purchase_Price) as Total FROM inventory where stock >=1", (err, res) => {
+    sql.query("SELECT SUM(Stock * Purchase_Price) as Total FROM Inventory where stock >=1", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -65,7 +65,7 @@ Inventory.getTotal = result => {
 };
 // MUESTRA NO PERECEDEROS
 Inventory.getNotPerishable = result => {
-    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, i.Stock, i.Unit_Price, i.Purchase_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id where pp.Perishable=0 and i.Stock >=1", (err, res) => {
+    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product ,pp.Name as Product, pp.Perishable, i.Stock, i.Unit_Price, i.Purchase_Price, i.Statuss,concat(pp.Name,', ',b.Name, ', ',pc.Name) as ProductComplete FROM Inventory as i left join Lot as l on i.Lot_Id = l.Lot_Id inner join Product as pp on pp.Product_Id = l.Product_Id inner join Brand as b on pp.Brand_Id = b.Brand_Id inner join Product_Category as pc on pp.Product_Category_Id = pc.Product_Category_Id where pp.Perishable=0 and i.Stock >=1", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -78,7 +78,7 @@ Inventory.getNotPerishable = result => {
 
 //Inventory Group
 Inventory.getGroup = result => {
-    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product, pp.Name as Product, b.Name as Brand, pc.Name as Category, SUM(i.Stock) as Stock, ROUND(SUM(i.Stock *i.Unit_Price)/SUM(i.Stock),2) as Precio FROM inventory as i left join lot as l on i.Lot_Id = l.Lot_Id inner join product as pp on pp.Product_Id = l.Product_Id inner join brand as b on pp.Brand_Id = b.Brand_Id inner join product_category as pc on pp.Product_Category_Id = pc.Product_Category_Id where i.Stock >= 1 Group by pp.Name", (err, res) => {
+    sql.query("SELECT i.Inventory_Id,l.Product_Id, l.Lot_Id, i.Lot_Id,pp.Correlative_Product as Correlative_Product, pp.Name as Product, b.Name as Brand, pc.Name as Category, SUM(i.Stock) as Stock, ROUND(SUM(i.Stock *i.Unit_Price)/SUM(i.Stock),2) as Precio FROM Inventory as i left join Lot as l on i.Lot_Id = l.Lot_Id inner join Product as pp on pp.Product_Id = l.Product_Id inner join Brand as b on pp.Brand_Id = b.Brand_Id inner join Product_Category as pc on pp.Product_Category_Id = pc.Product_Category_Id where i.Stock >= 1 Group by pp.Name", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -91,7 +91,7 @@ Inventory.getGroup = result => {
 //
 Inventory.updateById = (id, inventario, result) => {
     sql.query(
-        "UPDATE inventory SET Stock = ?, Unit_Price = ?, Purchase_Price = ?, Lot_Id = ?, Statuss = ? WHERE Inventory_Id = ?", [inventario.Stock, inventario.Unit_Price, inventario.Purchase_Price, inventario.Lot_Id, inventario.Statuss, id],
+        "UPDATE Inventory SET Stock = ?, Unit_Price = ?, Purchase_Price = ?, Lot_Id = ?, Statuss = ? WHERE Inventory_Id = ?", [inventario.Stock, inventario.Unit_Price, inventario.Purchase_Price, inventario.Lot_Id, inventario.Statuss, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -112,7 +112,7 @@ Inventory.updateById = (id, inventario, result) => {
 };
 
 Inventory.remove = (id, result) => {
-    sql.query("DELETE FROM inventory WHERE Inventory_Id = ?", id, (err, res) => {
+    sql.query("DELETE FROM Inventory WHERE Inventory_Id = ?", id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);

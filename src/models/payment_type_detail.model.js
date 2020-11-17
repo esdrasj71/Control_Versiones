@@ -10,7 +10,7 @@ const Payment_Type_Detail = function(payment_type_detail) {
 
 //CRUD
 Payment_Type_Detail.create = (newPurchaseD, result) => {
-    sql.query("INSERT INTO payment_type_detail SET ?", newPurchaseD, (err, res) => {
+    sql.query("INSERT INTO Payment_Type_Detail SET ?", newPurchaseD, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -22,7 +22,7 @@ Payment_Type_Detail.create = (newPurchaseD, result) => {
 };
 
 Payment_Type_Detail.findById = (PaymentDetailId, result) => {
-    sql.query(`SELECT * FROM payment_type_detail WHERE Type_Detail_Id = ${PaymentDetailId}`, (err, res) => {
+    sql.query(`SELECT * FROM Payment_Type_Detail WHERE Type_Detail_Id = ${PaymentDetailId}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -40,7 +40,7 @@ Payment_Type_Detail.findById = (PaymentDetailId, result) => {
 };
 
 Payment_Type_Detail.getAll = result => {
-    sql.query("SELECT *, p.Method_Name as Method FROM payment_type_detail as e INNER JOIN payment as p ON p.Payment_Id = e.Payment_Id", (err, res) => { 
+    sql.query("SELECT *, p.Method_Name as Method FROM Payment_Type_Detail as e INNER JOIN Payment as p ON p.Payment_Id = e.Payment_Id", (err, res) => { 
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -53,7 +53,7 @@ Payment_Type_Detail.getAll = result => {
 
 Payment_Type_Detail.updateById = (id, paymentDetail, result) => {
     sql.query(
-        "UPDATE payment_type_detail SET Total_Amount = ?, Description = ?, Payment_Id = ?, Bill_header_Id = ? WHERE Type_Detail_Id = ?", [paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Payment_Id, paymentDetail.Bill_header_Id, id],
+        "UPDATE Payment_Type_Detail SET Total_Amount = ?, Description = ?, Payment_Id = ?, Bill_header_Id = ? WHERE Type_Detail_Id = ?", [paymentDetail.Total_Amount, paymentDetail.Description, paymentDetail.Payment_Id, paymentDetail.Bill_header_Id, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -72,7 +72,7 @@ Payment_Type_Detail.updateById = (id, paymentDetail, result) => {
 };
 
 Payment_Type_Detail.remove = (id, result) => {
-    sql.query("DELETE FROM payment_type_detail WHERE Type_Detail_Id = ?", id, (err, res) => {
+    sql.query("DELETE FROM Payment_Type_Detail WHERE Type_Detail_Id = ?", id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);

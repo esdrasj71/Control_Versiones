@@ -7,7 +7,7 @@ const Bank = function(bank) {
 
 //CRUD
 Bank.create = (newBank, result) => {
-  sql.query("INSERT INTO bank SET ?", newBank, (err, res) => {
+  sql.query("INSERT INTO Bank SET ?", newBank, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ Bank.create = (newBank, result) => {
 };
 
 Bank.findById = (bankId, result) => {
-  sql.query(`SELECT * FROM bank WHERE bank_id = ${bankId}`, (err, res) => {
+  sql.query(`SELECT * FROM Bank WHERE Bank_id = ${bankId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -38,7 +38,7 @@ Bank.findById = (bankId, result) => {
 };
 
 Bank.getAll = result => {
-  sql.query("SELECT * FROM bank ORDER BY Bank_Name", (err, res) => {
+  sql.query("SELECT * FROM Bank ORDER BY Bank_Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Bank.getAll = result => {
 
 Bank.updateById = (id, bank, result) => {
   sql.query(
-    "UPDATE bank SET bank_name = ? WHERE bank_id = ?",
+    "UPDATE Bank SET Bank_Name = ? WHERE Bank_id = ?",
     [bank.Bank_Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Bank.updateById = (id, bank, result) => {
 };
 
 Bank.remove = (id, result) => {
-  sql.query("DELETE FROM bank WHERE bank_id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Bank WHERE Bank_id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -92,7 +92,7 @@ Bank.remove = (id, result) => {
 };
 
 Bank.removeAll = result => {
-  sql.query("DELETE FROM bank", (err, res) => {
+  sql.query("DELETE FROM Bank", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

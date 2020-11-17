@@ -12,7 +12,7 @@ const Customers = function (customers) {
 
 //CRUD
 Customers.create = (newCustomers, result) => {
-  sql.query("INSERT INTO customers SET ?", newCustomers, (err, res) => {
+  sql.query("INSERT INTO Customers SET ?", newCustomers, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -24,7 +24,7 @@ Customers.create = (newCustomers, result) => {
 };
 
 Customers.findById = (customersId, result) => {
-  sql.query(`SELECT * FROM customers WHERE Customers_Id = ${customersId}`, (err, res) => {
+  sql.query(`SELECT * FROM Customers WHERE Customers_Id = ${customersId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -43,7 +43,7 @@ Customers.findById = (customersId, result) => {
 };
 
 Customers.getAll = result => {
-  sql.query("SELECT * FROM customers", (err, res) => {
+  sql.query("SELECT * FROM Customers", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -57,7 +57,7 @@ Customers.getAll = result => {
 
 Customers.updateById = (id, customer, result) => {
   sql.query(
-    "UPDATE customers SET DPI = ?, Names = ?, Last_Names = ?, Phone_Number = ?, NIT = ?, Address = ? WHERE Customers_Id = ?",
+    "UPDATE Customers SET DPI = ?, Names = ?, Last_Names = ?, Phone_Number = ?, NIT = ?, Address = ? WHERE Customers_Id = ?",
     [customer.DPI, customer.Names, customer.Last_names, customer.Phone_Number, customer.NIT, customer.Address, id],
     (err, res) => {
       if (err) {
@@ -78,7 +78,7 @@ Customers.updateById = (id, customer, result) => {
 };
 
 Customers.remove = (id, result) => {
-  sql.query("DELETE FROM customers WHERE Customers_Id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Customers WHERE Customers_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

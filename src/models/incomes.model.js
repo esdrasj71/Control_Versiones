@@ -21,7 +21,7 @@ Incomes.getingresos = result => {
     });
   };
 Incomes.getALL = result=>{
-  sql.query("SELECT Income_Id, Branch_Office1, Branch_Office2, Branch_Office3, MONTH(Income_Date) as Income_Date, Total FROM incomes WHERE  YEAR(Income_Date) = YEAR(NOW());", (err,res)=>{
+  sql.query("SELECT Income_Id, Branch_Office1, Branch_Office2, Branch_Office3, MONTH(Income_Date) as Income_Date, Total FROM Incomes WHERE  YEAR(Income_Date) = YEAR(NOW());", (err,res)=>{
     if(err){
       console.log("error: ", err);
       result(null, err);
@@ -33,7 +33,7 @@ Incomes.getALL = result=>{
 };
 
 Incomes.getEmpresa = result=>{
-  sql.query("SELECT * FROM company;", (err,res)=>{
+  sql.query("SELECT * FROM Company;", (err,res)=>{
     if(err){
       console.log("error: ", err);
       result(null, err);
@@ -45,7 +45,7 @@ Incomes.getEmpresa = result=>{
 };
 
 Incomes.create = (newIngreso, result)=>{
-  sql.query("INSERT INTO incomes SET ? ", newIngreso, (err,res)=>{
+  sql.query("INSERT INTO Incomes SET ? ", newIngreso, (err,res)=>{
     if(err){
       console.log("Error: ", err);
       result(err, null);
@@ -57,7 +57,7 @@ Incomes.create = (newIngreso, result)=>{
 }
 Incomes.updateById = (mes, ingreso, result) => {
   sql.query(
-      "UPDATE incomes SET Branch_Office1 = ?, Branch_Office2 = ?, Branch_Office3 = ?, Total = ? WHERE MONTH(Income_Date) = ?", [ingreso.Branch_Office1, ingreso.Branch_Office2, ingreso.Branch_Office3, ingreso.Total, mes],
+      "UPDATE Incomes SET Branch_Office1 = ?, Branch_Office2 = ?, Branch_Office3 = ?, Total = ? WHERE MONTH(Income_Date) = ?", [ingreso.Branch_Office1, ingreso.Branch_Office2, ingreso.Branch_Office3, ingreso.Total, mes],
       (err, res) => {
           if (err) {
               console.log("error: ", err);

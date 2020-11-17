@@ -7,7 +7,7 @@ const Expenses = function(expenses) {
 
 //CRUD
 Expenses.create = (newExpenses, result) => {
-  sql.query("INSERT INTO expenses SET ?", newExpenses, (err, res) => {
+  sql.query("INSERT INTO Expenses SET ?", newExpenses, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ Expenses.create = (newExpenses, result) => {
 };
 
 Expenses.findById = (expensesId, result) => {
-  sql.query(`SELECT * FROM expenses WHERE expenses_id = ${expensesId}`, (err, res) => {
+  sql.query(`SELECT * FROM Expenses WHERE Expenses_Id = ${expensesId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -38,7 +38,7 @@ Expenses.findById = (expensesId, result) => {
 };
 
 Expenses.getAll = result => {
-  sql.query("SELECT * FROM expenses ORDER BY Name", (err, res) => {
+  sql.query("SELECT * FROM Expenses ORDER BY Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Expenses.getAll = result => {
 
 Expenses.updateById = (id, expenses, result) => {
   sql.query(
-    "UPDATE expenses SET name = ? WHERE expenses_id = ?",
+    "UPDATE Expenses SET Name = ? WHERE Expenses_Id = ?",
     [expenses.Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Expenses.updateById = (id, expenses, result) => {
 };
 
 Expenses.remove = (id, result) => {
-  sql.query("DELETE FROM expenses WHERE expenses_id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Expenses WHERE Expenses_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

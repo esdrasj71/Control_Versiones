@@ -7,7 +7,7 @@ const Payment = function(payment) {
 
 //CRUD
 Payment.create = (newPayment, result) => {
-  sql.query("INSERT INTO payment SET ?", newPayment, (err, res) => {
+  sql.query("INSERT INTO Payment SET ?", newPayment, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ Payment.create = (newPayment, result) => {
 };
 
 Payment.findById = (PaymentId, result) => {
-  sql.query(`SELECT * FROM payment WHERE Payment_Id = ${PaymentId}`, (err, res) => {
+  sql.query(`SELECT * FROM Payment WHERE Payment_Id = ${PaymentId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -38,7 +38,7 @@ Payment.findById = (PaymentId, result) => {
 };
 
 Payment.getAll = result => {
-  sql.query("SELECT * FROM payment", (err, res) => {
+  sql.query("SELECT * FROM Payment", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Payment.getAll = result => {
 
 Payment.updateById = (id, payment, result) => {
   sql.query(
-    "UPDATE payment SET Method_Name = ? WHERE Payment_Id = ?",
+    "UPDATE Payment SET Method_Name = ? WHERE Payment_Id = ?",
     [payment.Method_Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Payment.updateById = (id, payment, result) => {
 };
 
 Payment.remove = (id, result) => {
-  sql.query("DELETE FROM payment WHERE Payment_Id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Payment WHERE Payment_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

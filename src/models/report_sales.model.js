@@ -20,7 +20,7 @@ Report_Sales.getReport1 = (newReport, result) => {
     });
 };
 Report_Sales.getReport3 = result => {
-    sql.query("SELECT c.NIT, CONCAT(C.Names,' ',C.Last_names) AS Names , c.Phone_Number ,SUM(a.Total - a.Quantity) as Total, c.Customers_Id, COUNT(*) as NoFacturas FROM accounts_receivable as a INNER JOIN bill_header as b on b.Bill_header_Id = a.Bill_header_Id INNER JOIN customers as c on c.Customers_Id = b.Customers_Id WHERE b.Payment_Complete = 0 GROUP by c.Names ORDER by Total DESC;", (err, res) => {
+    sql.query("SELECT c.NIT, CONCAT(c.Names,' ',c.Last_names) AS Names , c.Phone_Number ,SUM(a.Total - a.Quantity) as Total, c.Customers_Id, COUNT(*) as NoFacturas FROM Accounts_Receivable as a INNER JOIN Bill_Header as b on b.Bill_header_Id = a.Bill_header_Id INNER JOIN Customers as c on c.Customers_Id = b.Customers_Id WHERE b.Payment_Complete = 0 GROUP by c.Names ORDER by Total DESC;", (err, res) => {
         if (err) {
             console.log("Error: ", err);
             result(err, null);
@@ -47,7 +47,7 @@ Report_Sales.getReport2 = (newReport, result) => {
 };
 
 Report_Sales.getSerie = result => {
-    sql.query("SELECT Serie_Id, Nombre as Serie FROM serie;", (err, res) => {
+    sql.query("SELECT Serie_Id, Nombre as Serie FROM Serie;", (err, res) => {
         if (err) {
             console.log("Error: ", err);
             result(err, null);

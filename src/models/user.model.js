@@ -58,7 +58,7 @@ User.create = async (newUser, result) => {
   User.updateById = async (id, user, result) => {
     user.Password= await bcrypt.hash(user.Password, 8);
     sql.query(
-      "UPDATE user SET Username = ?, Password = ? WHERE User_Id = ?",
+      "UPDATE User SET Username = ?, Password = ? WHERE User_Id = ?",
       [user.Username, user.Password, id],
       (err, res) => {
         if (err) {

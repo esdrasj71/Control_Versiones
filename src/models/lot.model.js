@@ -7,7 +7,7 @@ const Lot = function(lot){
 //Creacion de CRUD
     //CREATE
 Lot.create = (newLot, result) => {
-    sql.query("INSERT INTO lot SET ?", newLot, (err, res)=>{
+    sql.query("INSERT INTO Lot SET ?", newLot, (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -19,7 +19,7 @@ Lot.create = (newLot, result) => {
 };
     //BUSCAR POR ID
 Lot.findById = (lote_id, result) => {
-    sql.query(`SELECT l.Lot_Id,p.Product_Id, p.Name as Product,concat(p.Name,', ',b.Name, ', ',pc.Name) as Complete, p.Correlative_Product, l.Due_Date FROM lot as l inner join product as p on l.Product_Id = p.Product_Id inner join brand as b on b.Brand_Id = p.Product_Id inner join product_category as pc on pc.Product_Category_Id=p.Product_Id WHERE lot_id = ${lote_id}`, (err,res)=>{
+    sql.query(`SELECT l.Lot_Id,p.Product_Id, p.Name as Product,concat(p.Name,', ',b.Name, ', ',pc.Name) as Complete, p.Correlative_Product, l.Due_Date FROM Lot as l inner join Product as p on l.Product_Id = p.Product_Id inner join Brand as b on b.Brand_Id = p.Product_Id inner join Product_Category as pc on pc.Product_Category_Id=p.Product_Id WHERE Lot_Id = ${lote_id}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -37,7 +37,7 @@ Lot.findById = (lote_id, result) => {
 };
 //BUSCAR TODO
 Lot.getAll = result => {
-    sql.query("SELECT l.Lot_Id, l.Product_Id, p.Name as Product, l.Due_Date, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM lot as l inner join product as p on l.Product_Id = p.Product_Id inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(l.Due_Date) DESC, MONTH(l.Due_Date) DESC, DAY(l.Due_Date) ASC, p.Name ASC", (err, res) => {
+    sql.query("SELECT l.Lot_Id, l.Product_Id, p.Name as Product, l.Due_Date, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM Lot as l inner join Product as p on l.Product_Id = p.Product_Id inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(l.Due_Date) DESC, MONTH(l.Due_Date) DESC, DAY(l.Due_Date) ASC, p.Name ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -51,7 +51,7 @@ Lot.getAll = result => {
 
 //ACTUALIZA ID
 Lot.updateById = (id, lot, result) => {
-    sql.query("UPDATE lot SET due_date = ?, product_id = ? WHERE lot_id = ?",
+    sql.query("UPDATE Lot SET Due_Date = ?, Product_Id = ? WHERE Lot_Id = ?",
       [lot.Due_Date, lot.Product_Id, id],
       (err, res) => {
         if (err) {

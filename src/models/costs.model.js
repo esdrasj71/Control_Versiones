@@ -7,7 +7,7 @@ const Costs = function(costs) {
 
 //CRUD
 Costs.create = (newCosts, result) => {
-  sql.query("INSERT INTO costs SET ?", newCosts, (err, res) => {
+  sql.query("INSERT INTO Costs SET ?", newCosts, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ Costs.create = (newCosts, result) => {
 };
 
 Costs.findById = (costsId, result) => {
-  sql.query(`SELECT * FROM costs WHERE cost_id = ${costsId}`, (err, res) => {
+  sql.query(`SELECT * FROM Costs WHERE Cost_Id = ${costsId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -38,7 +38,7 @@ Costs.findById = (costsId, result) => {
 };
 
 Costs.getAll = result => {
-  sql.query("SELECT * FROM costs ORDER BY Name", (err, res) => {
+  sql.query("SELECT * FROM Costs ORDER BY Name", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Costs.getAll = result => {
 
 Costs.updateById = (id, costs, result) => {
   sql.query(
-    "UPDATE costs SET name = ? WHERE cost_id = ?",
+    "UPDATE Costs SET Name = ? WHERE Cost_Id = ?",
     [costs.Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Costs.updateById = (id, costs, result) => {
 };
 
 Costs.remove = (id, result) => {
-  sql.query("DELETE FROM costs WHERE cost_id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Costs WHERE Cost_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

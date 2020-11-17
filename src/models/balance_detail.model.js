@@ -5,7 +5,7 @@ const Insert_Balance = function(insert_balance){
     this.Balance_Id = insert_balance.Balance_Id;
 }
 Insert_Balance.create = (newBalanceDetalle, result) => {
-    sql.query("INSERT INTO detail_balance_sheet SET ?", newBalanceDetalle, (err, res) => {
+    sql.query("INSERT INTO Detail_Balance_Sheet SET ?", newBalanceDetalle, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, {estado: false});

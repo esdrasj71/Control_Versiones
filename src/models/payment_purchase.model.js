@@ -7,7 +7,7 @@ const Payment_Purchase = function(payment_purchase) {
 
 //CRUD
 Payment_Purchase.create = (newPayment, result) => {
-  sql.query("INSERT INTO payment_purchase SET ?", newPayment, (err, res) => {
+  sql.query("INSERT INTO Payment_Purchase SET ?", newPayment, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ Payment_Purchase.create = (newPayment, result) => {
 };
 
 Payment_Purchase.findById = (PaymentId, result) => {
-  sql.query(`SELECT * FROM payment_purchase WHERE Payment_Purchase_Id = ${PaymentId}`, (err, res) => {
+  sql.query(`SELECT * FROM Payment_Purchase WHERE Payment_Purchase_Id = ${PaymentId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -38,7 +38,7 @@ Payment_Purchase.findById = (PaymentId, result) => {
 };
 
 Payment_Purchase.getAll = result => {
-  sql.query("SELECT * FROM payment_purchase", (err, res) => {
+  sql.query("SELECT * FROM Payment_Purchase", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,7 +51,7 @@ Payment_Purchase.getAll = result => {
 
 Payment_Purchase.updateById = (id, payment, result) => {
   sql.query(
-    "UPDATE payment_purchase SET Method_Name = ? WHERE Payment_Purchase_Id = ?",
+    "UPDATE Payment_Purchase SET Method_Name = ? WHERE Payment_Purchase_Id = ?",
     [payment.Method_Name, id],
     (err, res) => {
       if (err) {
@@ -73,7 +73,7 @@ Payment_Purchase.updateById = (id, payment, result) => {
 };
 
 Payment_Purchase.remove = (id, result) => {
-  sql.query("DELETE FROM payment_purchase WHERE Payment_Purchase_Id = ?", id, (err, res) => {
+  sql.query("DELETE FROM Payment_Purchase WHERE Payment_Purchase_Id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

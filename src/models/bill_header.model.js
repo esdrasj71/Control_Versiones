@@ -13,7 +13,7 @@ const Bill_Header = function(bill_header) {
 };
 //Generete NoFactura Bill_Header
 Bill_Header.getNoFactura = (Serie_Id, result) => {
-    sql.query("SELECT Cantidad_inicial FROM serie WHERE Serie_Id = ?;",Serie_Id, (err, res) => {
+    sql.query("SELECT Cantidad_inicial FROM Serie WHERE Serie_Id = ?;",Serie_Id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -27,7 +27,7 @@ Bill_Header.getNoFactura = (Serie_Id, result) => {
 
 //CRUD
 Bill_Header.create = (newBill, result) => {
-    sql.query("UPDATE  serie SET Cantidad_inicial = Cantidad_inicial +1 WHERE Serie_Id = ?;" ,newBill.Serie_Id, (err, res) => {
+    sql.query("UPDATE Serie SET Cantidad_inicial = Cantidad_inicial +1 WHERE Serie_Id = ?;" ,newBill.Serie_Id, (err, res) => {
         if (err) {
             console.log("Error: ", err);
             result(err, null);
@@ -37,7 +37,7 @@ Bill_Header.create = (newBill, result) => {
         //result(null, res);
 
    
-    sql.query("INSERT INTO bill_header SET ?", newBill, (err, res) => {
+    sql.query("INSERT INTO Bill_Header SET ?", newBill, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -51,7 +51,7 @@ Bill_Header.create = (newBill, result) => {
 };
 
 Bill_Header.findById = (Bill_Header_Id, result) => {
-    sql.query(`SELECT * FROM bill_header WHERE Bill_header_Id = ${Bill_Header_Id}`, (err, res) => {
+    sql.query(`SELECT * FROM Bill_Header WHERE Bill_header_Id = ${Bill_Header_Id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -69,7 +69,7 @@ Bill_Header.findById = (Bill_Header_Id, result) => {
 };
 
 Bill_Header.getAll = result => {
-    sql.query("SELECT * FROM bill_header", (err, res) => {
+    sql.query("SELECT * FROM Bill_Header", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -82,7 +82,7 @@ Bill_Header.getAll = result => {
 
 Bill_Header.updateById = (id, bill_header, result) => {
     sql.query(
-        "UPDATE bill_header SET Correlative_Number = ?, Payment_Complete = ?,Customers_Id = ?, Employee_Id = ? WHERE Bill_Header_Id = ?, Serie_Id = ?", [bill_header.Correlative_Number, bill_header.Date, bill_header.Total, bill_header.Payment_Complete, bill_header.Customers_Id, bill_header.Employee_Id, id,bill_header.Serie_Id],
+        "UPDATE Bill_Header SET Correlative_Number = ?, Payment_Complete = ?,Customers_Id = ?, Employee_Id = ? WHERE Bill_Header_Id = ?, Serie_Id = ?", [bill_header.Correlative_Number, bill_header.Date, bill_header.Total, bill_header.Payment_Complete, bill_header.Customers_Id, bill_header.Employee_Id, id,bill_header.Serie_Id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -102,7 +102,7 @@ Bill_Header.updateById = (id, bill_header, result) => {
 };
 
 Bill_Header.remove = (id, result) => {
-    sql.query("DELETE FROM bill_header WHERE Bill_header_Id = ?", id, (err, res) => {
+    sql.query("DELETE FROM Bill_Header WHERE Bill_header_Id = ?", id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
