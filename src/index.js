@@ -90,7 +90,10 @@ app.use("", rutasProtegidas,require("./routes/balance_sheet.routes"));
 app.use("", rutasProtegidas,require("./routes/balance_detail.routes"));
 
 
-
+setInterval(() => {
+  conectar.query('SELECT 1');
+  console.log('reactivando conexion');
+}, 2000);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
