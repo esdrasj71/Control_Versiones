@@ -89,7 +89,6 @@ app.use("", rutasProtegidas,require("./routes/series.routes"));
 app.use("", rutasProtegidas,require("./routes/balance_sheet.routes"));
 app.use("", rutasProtegidas,require("./routes/balance_detail.routes"));
 
-
 setInterval(() => {
   conectar.query('SELECT 1');
   console.log('reactivando conexion');
