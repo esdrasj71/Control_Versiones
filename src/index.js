@@ -90,6 +90,14 @@ app.use("", rutasProtegidas,require("./routes/balance_sheet.routes"));
 app.use("", rutasProtegidas,require("./routes/balance_detail.routes"));
 
 
+conectar.connect(function(err){
+  if(err){
+      console.log('Error de conexion'+ err.stack);
+  }else{
+      console.log('conexion exitosa');
+  }
+})
+
 setInterval(() => {
   conectar.query('SELECT 1');
   console.log('reactivando conexion');
