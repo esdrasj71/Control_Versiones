@@ -2,11 +2,10 @@ const mysql = require('mysql');
 console.log('Conectando a la base de datos');
 
 var conection = mysql.createConnection({
-
-    host: '172.107.32.129',
-    port: '15390',
-    user: 'kevin',
-    password: '49853095',
+    host: 'localhost',
+    port: '3306',
+    user: 'root',
+    password: '',
     database: 'proyectogg'
 })
 
