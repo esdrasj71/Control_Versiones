@@ -35,9 +35,27 @@ Lot.findById = (lote_id, result) => {
           result({ kind: "No se ha encontrado el Lote! " }, null);
     });
 };
+//VERIFICAR LOTE
+Lot.VerificarProducto = (product_id, result) => {
+  sql.query(`Select @stock:= MAX(a.Stock) as num from Inventory as a inner join Lot as l on a.Lot_Id = l.Lot_Id  WHERE l.Due_Date is not null and l.Product_Id=${product_id} LIMIT 1;`, (err,res)=>{
+      if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        }   
+
+      if (res.length) {
+          console.log("Lote: ", res[0]);
+          result(null, res[0]);
+          return;
+        }
+
+        result({ kind: "No se ha encontrado el Lote! " }, null);
+  });
+};
 //BUSCAR TODO
 Lot.getAll = result => {
-    sql.query("SELECT l.Lot_Id, l.Product_Id, p.Name as Product, l.Due_Date, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM Lot as l inner join Product as p on l.Product_Id = p.Product_Id inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id ORDER BY YEAR(l.Due_Date) DESC, MONTH(l.Due_Date) DESC, DAY(l.Due_Date) ASC, p.Name ASC", (err, res) => {
+    sql.query("SELECT l.Lot_Id, l.Product_Id, p.Name as Product, l.Due_Date, concat(p.Name, ', ' ,b.Name, ', ', pc.Name) as Complete FROM Lot as l inner join Product as p on l.Product_Id = p.Product_Id inner join Brand as b on p.Brand_Id = b.Brand_Id inner join Product_Category as pc on p.Product_Category_Id = pc.Product_Category_Id Inner Join Inventory as i on i.Lot_Id = l.Lot_Id WHERE i.Stock != -1 and l.Due_Date is not null ORDER BY YEAR(l.Due_Date) DESC, MONTH(l.Due_Date) DESC, DAY(l.Due_Date) ASC, p.Name ASC", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

@@ -52,6 +52,23 @@ exports.findAll = (req, res) => {
       } else res.send(data);
     });
   };
+
+  exports.Verificar = (req, res) => {
+    //We obtain the brand with its id
+    Lot.VerificarProducto(req.params.Lot_Id, (err, data) => {
+      if (err) {
+        if (err.kind === "we have not found the lot") {
+          res.status(404).send({
+            message: ` ID no encontrado ${req.params.Lot_Id}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "ID no encontrado " + req.params.Lot_Id
+          });
+        }
+      } else res.send(data);
+    });
+  };
 //UPDATE
   exports.update = (req, res) => {
     // Validating request
