@@ -19,7 +19,7 @@ Lot.create = (newLot, result) => {
 };
     //BUSCAR POR ID
 Lot.findById = (lote_id, result) => {
-    sql.query(`SELECT l.Lot_Id,p.Product_Id, p.Name as Product,concat(p.Name,', ',b.Name, ', ',pc.Name) as Complete, p.Correlative_Product, l.Due_Date FROM Lot as l inner join Product as p on l.Product_Id = p.Product_Id inner join Brand as b on b.Brand_Id = p.Product_Id inner join Product_Category as pc on pc.Product_Category_Id=p.Product_Id WHERE Lot_Id = ${lote_id}`, (err,res)=>{
+    sql.query(`SELECT l.Lot_Id,p.Product_Id, p.Name as Product,concat(p.Name,', ',b.Name, ', ',pc.Name) as Complete, p.Correlative_Product, l.Due_Date FROM Lot as l INNER join Product as p on l.Product_Id = p.Product_Id INNER join Brand as b on b.Brand_Id = p.Brand_Id INNER join Product_Category as pc on pc.Product_Category_Id=p.Product_Category_Id WHERE l.Lot_Id = ${lote_id}`, (err,res)=>{
         if (err) {
             console.log("error: ", err);
             result(err, null);
