@@ -4,6 +4,6 @@ const lot = require("../controllers/lot.controller.js");
     router.post("/lot", lot.create);
     router.get("/lot", lot.findAll);
     router.get("/lot/:Lot_Id", lot.findOne);
-    router.get("/lote/:Lot_Id", lot.Verificar);
+   // router.get("/lote/:Lot_Id", lot.Verificar);
     router.put("/lot/:Lot_Id", lot.update);
 module.exports=router;
