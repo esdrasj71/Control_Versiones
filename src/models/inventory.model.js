@@ -53,7 +53,7 @@ Inventory.getAll = result => {
 };
 //Total Mercaderia
 Inventory.getTotal = result => {
-    sql.query("SELECT SUM(Stock * Purchase_Price) as Total FROM Inventory where stock >=0", (err, res) => {
+    sql.query("SELECT SUM(Stock * Purchase_Price) as Total FROM Inventory where Stock >=0", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
