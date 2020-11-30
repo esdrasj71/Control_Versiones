@@ -2,10 +2,10 @@ const mysql = require('mysql');
 console.log('Conectando a la base de datos');
 
 var conection = mysql.createConnection({
-    host: 'mysql-15388-0.cloudclusters.net',
-    port: '15388',
-    user: 'andres',
-    password: '123andres',
+    host: 'mysql-15390-0.cloudclusters.net',
+    port: '15390',
+    user: 'kevin',
+    password: '49853095',
     database: 'proyectogg'
 })
 
